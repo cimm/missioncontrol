@@ -1,0 +1,7 @@
+<h1>Units</h1>
+<%= form_for @unit, :url => units_path do |f| %>
+  <% # TODO URL param only needed for RSpec? %>
+  <%= f.submit "Add unit" %>
+<% end %>
+
+<p>Total: <%= @total_units %> units</p>
