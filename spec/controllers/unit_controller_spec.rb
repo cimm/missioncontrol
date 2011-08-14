@@ -8,10 +8,12 @@ describe UnitsController do
   end
 
   describe "index" do
+    let(:units)       { mock("All units") }
     let(:total_units) { mock("Total number of units")}
 
     before :each do
-      Unit.stub(:count => total_units)
+      Unit.stub(:all => units)
+      units.stub(:count => total_units)
     end
 
     it "creates a new unit" do
@@ -24,8 +26,18 @@ describe UnitsController do
       assigns(:unit).should eql unit
     end
 
+    it "gets all the units" do
+      Unit.should_receive(:all)
+      get :index
+    end
+
+    it "assigns all the units" do
+      get :index
+      assigns(:units).should eql units
+    end
+
     it "gets the total number of units" do
-      Unit.should_receive(:count)
+      units.should_receive(:count)
       get :index
     end
 
@@ -41,27 +53,29 @@ describe UnitsController do
   end
 
   describe "create" do
+    let(:params) { {} } 
+
     before :each do
       unit.stub(:save!)
     end
 
     it "creates a new unit" do
-      Unit.should_receive(:new)
-      post :create
+      Unit.should_receive(:new).with(params)
+      post :create, :unit => params
     end
 
     it "persists the unit" do
       unit.should_receive(:save!)
-      post :create
+      post :create, :unit => params
     end
 
     it "assigns a flash message" do
-      post :create
+      post :create, :unit => params
       flash[:notice].should_not be_nil
     end
 
     it "redirects to the units show page" do
-      post :create
+      post :create, :unit => params
       response.should redirect_to(:action => "index")
     end
   end

@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20110810064005) do
 
   create_table "units", :force => true do |t|
+    t.date     "executed_at", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
