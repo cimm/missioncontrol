@@ -123,6 +123,9 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    rspec2-rails-views-matchers (0.1.6)
+      nokogiri (~> 1.5.0)
+      rspec (>= 2.0.0)
     rubyzip (0.9.4)
     sass (3.1.7)
     sass-rails (3.1.0.rc.5)
@@ -166,6 +169,7 @@ DEPENDENCIES
   json
   rails (= 3.1.0.rc5)
   rspec-rails
+  rspec2-rails-views-matchers
   sass-rails (~> 3.1.0.rc)
   sqlite3
   uglifier

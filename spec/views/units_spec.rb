@@ -33,17 +33,19 @@ describe "units/index" do
 
   it "has a executed date fields for the new unit" do
     render
-    rendered.should have_selector('#unit_executed_at_1i')
-    rendered.should have_selector('#unit_executed_at_2i')
-    rendered.should have_selector('#unit_executed_at_3i')
+    rendered.should have_selector("#unit_executed_at_1i")
+    rendered.should have_selector("#unit_executed_at_2i")
+    rendered.should have_selector("#unit_executed_at_3i")
   end
 
   it "shows the current date in the executed date fields" do
     today = Date.today
     render
-    rendered.should have_xpath("//select[@id='unit_executed_at_1i']/option[@selected='selected' and @value='#{today.year}']")
-    rendered.should have_xpath("//select[@id='unit_executed_at_2i']/option[@selected='selected' and @value='#{today.month}']")
-    rendered.should have_xpath("//select[@id='unit_executed_at_3i']/option[@selected='selected' and @value='#{today.day}']")
+    rendered.should have_tag("select") do
+      with_tag "option", :with => {:selected => "selected", :value => today.year}
+      with_tag "option", :with => {:selected => "selected", :value => today.month}
+      with_tag "option", :with => {:selected => "selected", :value => today.day}
+    end
   end
 
   it "has a submit button to add the new unit" do
@@ -77,8 +79,8 @@ describe "units/edit" do
 
   it "has a executed date fields for the unit" do
     render
-    rendered.should have_selector('#unit_executed_at_1i')
-    rendered.should have_selector('#unit_executed_at_2i')
-    rendered.should have_selector('#unit_executed_at_3i')
+    rendered.should have_selector("#unit_executed_at_1i")
+    rendered.should have_selector("#unit_executed_at_2i")
+    rendered.should have_selector("#unit_executed_at_3i")
   end
 end
