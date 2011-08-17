@@ -7,7 +7,10 @@
 
 <ul>
   <% @units.each do |unit| %>
-    <li><%= unit.executed_at %></li>
+    <li>
+      <%= unit.executed_at %>
+      <%= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}" %>
+    </li>
   <% end %>
 </ul>
 

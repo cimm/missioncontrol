@@ -1,3 +1,3 @@
 Invoicr::Application.routes.draw do
-  resources :units, :only => [:index, :create]
+  resources :units, :except => [:destroy]
 end

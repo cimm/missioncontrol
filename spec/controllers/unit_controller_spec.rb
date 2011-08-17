@@ -46,14 +46,14 @@ describe UnitsController do
       assigns(:total_units).should eql total_units
     end
 
-    it "shows the units page" do
+    it "renders the units page" do
       get :index
-      response.should be_success
+      response.should render_template(:index)
     end
   end
 
   describe "create" do
-    let(:params) { {} } 
+    let(:params) { {} }
 
     before :each do
       unit.stub(:save!)
@@ -74,8 +74,61 @@ describe UnitsController do
       flash[:notice].should_not be_nil
     end
 
-    it "redirects to the units show page" do
+    it "redirects to the units index page" do
       post :create, :unit => params
+      response.should redirect_to(:action => "index")
+    end
+  end
+
+  describe "edit" do
+    let(:unit_id) { "Id for the edited unit" }
+
+    before :each do
+      Unit.stub(:find => unit)
+    end
+
+    it "renders the edit page" do
+      get :edit, :id => unit_id
+      response.should render_template(:edit)
+    end
+
+    it "gets the unit to edit" do
+      Unit.should_receive(:find).with(unit_id)
+      get :edit, :id => unit_id
+    end
+
+    it "assigns the unit" do
+      get :edit, :id => unit_id
+      assigns(:unit).should eql unit
+    end
+  end
+
+  describe "update" do
+    let(:unit_id) { "Id for the updated unit" }
+    let(:params) { {} }
+
+    before :each do
+      Unit.stub(:find => unit)
+      unit.stub(:update_attributes)
+    end
+
+    it "gets the unit to update" do
+      Unit.should_receive(:find).with(unit_id)
+      put :update, :id => unit_id, :unit => params
+    end
+
+    it "updates and persits the unit" do
+      unit.should_receive(:update_attributes).with(params)
+      put :update, :id => unit_id, :unit => params
+    end
+
+    it "assigns a flash message" do
+      put :update, :id => unit_id, :unit => params
+      flash[:notice].should_not be_nil
+    end
+
+    it "redirects to the units index page" do
+      put :update, :id => unit_id, :unit => params
       response.should redirect_to(:action => "index")
     end
   end

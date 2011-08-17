@@ -24,6 +24,13 @@ describe "units/index" do
     end
   end
 
+  it "shows an edit link for the units" do
+    render
+    units.each do |u|
+      rendered.should have_selector("a#edit_unit_#{u.id}")
+    end
+  end
+
   it "has a executed date fields for the new unit" do
     render
     rendered.should have_selector('#unit_executed_at_1i')
@@ -47,5 +54,31 @@ describe "units/index" do
   it "shows the total units" do
     render
     rendered.should have_content("Total: #{total_units} units")
+  end
+end
+
+describe "units/edit" do
+  let(:unit) { mock_model(Unit) }
+
+  before :each do
+    unit.stub(:executed_at)
+    assign :unit, unit
+  end
+
+  it "should have a title" do
+    render
+    rendered.should have_content("Edit unit")
+  end
+
+  it "has a submit button to update the unit" do
+    render
+    rendered.should have_button("Update unit")
+  end
+
+  it "has a executed date fields for the unit" do
+    render
+    rendered.should have_selector('#unit_executed_at_1i')
+    rendered.should have_selector('#unit_executed_at_2i')
+    rendered.should have_selector('#unit_executed_at_3i')
   end
 end

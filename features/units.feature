@@ -11,3 +11,8 @@ Feature: Track units spent
     Given I added a unit
     When I list the units
     Then I see date the unit was executed
+
+  Scenario: edit a unit
+    Given I added a unit
+    When I edit the unit's date
+    Then I see the unit's new date
