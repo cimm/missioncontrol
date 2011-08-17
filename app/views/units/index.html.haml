@@ -1,0 +1,16 @@
+%h1 Units
+= form_for @unit, :url => units_path do |f|
+  -# TODO URL param only needed for RSpec?
+  = f.date_select :executed_at
+  = f.submit "Add unit"
+
+%ul
+  - @units.each do |unit|
+    %li
+      = unit.executed_at
+      = link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}"
+
+%p
+  Total:
+  = @total_units
+  units

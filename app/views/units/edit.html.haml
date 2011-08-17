@@ -1,0 +1,4 @@
+%h1 Edit unit
+= form_for @unit, :url => unit_path(@unit) do |f|
+  = f.date_select :executed_at
+  = f.submit "Update unit"
