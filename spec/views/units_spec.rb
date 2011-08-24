@@ -17,7 +17,7 @@ describe "units/index" do
     rendered.should have_content("Units")
   end
 
-  it "shows the date the units were executed" do
+  it "shows the date the units were executed" do # FIXME DOesn't work as the executed_at method is stubbed, useless test
     render
     units.each do |u|
       rendered.should have_content(u.executed_at)

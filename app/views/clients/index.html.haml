@@ -1,1 +1,6 @@
 %h1 Clients
+
+%ul
+  - @clients.each do |client|
+    %li
+      = client.nickname

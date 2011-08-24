@@ -7,6 +7,29 @@ describe ClientsController do
     Client.stub(:new => client)
   end
 
+  describe "index" do
+    let(:clients) { mock("All clients") }
+
+    before :each do
+      Client.stub(:all => clients)
+    end
+
+    it "gets all the clients" do
+      Client.should_receive(:all)
+      get :index
+    end
+
+    it "assigns all the clients" do
+      get :index
+      assigns(:clients).should eql clients
+    end
+
+    it "renders the clients page" do
+      get :index
+      response.should render_template(:index)
+    end
+  end
+
   describe "new" do
     it "creates a new client" do
       Client.should_receive(:new)
