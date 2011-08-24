@@ -7,7 +7,7 @@ Feature: Track units spent
     When I add a unit
     Then the unit has been added
 
-  Scenario: show a unit's track date
+  Scenario: list the units executed dates
     Given I added a unit
     When I list the units
     Then I see date the unit was executed
