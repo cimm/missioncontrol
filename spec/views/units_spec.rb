@@ -3,10 +3,11 @@ require "spec_helper"
 describe "units/index" do
   let(:unit)        { mock_model(Unit) }
   let(:units)       { [unit] }
+  let(:executed_at) { Date.today }
   let(:total_units) { mock("Total number of units") }
 
   before :each do
-    unit.stub(:executed_at)
+    unit.stub(:executed_at => executed_at)
     assign :unit,        unit
     assign :units,       units
     assign :total_units, total_units
@@ -17,11 +18,9 @@ describe "units/index" do
     rendered.should have_content("Units")
   end
 
-  it "shows the date the units were executed" do # FIXME DOesn't work as the executed_at method is stubbed, useless test
+  it "shows the date the units were executed" do
     render
-    units.each do |u|
-      rendered.should have_content(u.executed_at)
-    end
+    rendered.should have_content(executed_at)
   end
 
   it "shows an edit link for the units" do
