@@ -1,7 +1,14 @@
 %h1 Clients
 
-%ul
-  - @clients.each do |client|
-    %li
-      = client.nickname
-      = link_to "edit", edit_client_path(client), :id => "edit_client_#{client.id}"
+%table
+  %thead
+    %tr
+      %th Nickname
+      %th Name
+      %th
+  %tbody
+    - @clients.each do |client|
+      %tr
+        %td.nickname= client.nickname
+        %td.name= client.name
+        %td= link_to "edit", edit_client_path(client), :id => "edit_client_#{client.id}"

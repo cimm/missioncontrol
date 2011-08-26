@@ -4,9 +4,10 @@ describe "clients/index" do
   let(:client)   { mock_model(Client) }
   let(:clients)  { [client] }
   let(:nickname) { mock("Client's nicknane") }
+  let(:name)     { mock("Client's full name") }
 
   before :each do
-    client.stub(:nickname => nickname)
+    client.stub(:nickname => nickname, :name => name)
     assign :clients, clients
   end
 
@@ -17,14 +18,21 @@ describe "clients/index" do
 
   it "shows the nicknames of the clients" do
     render
-    rendered.should have_content(nickname)
+    rendered.should have_css(".nickname") do
+      rendered.should have_content(nickname)
+    end
+  end
+
+  it "shows the names of the clients" do
+    render
+    rendered.should have_css(".name") do
+      rendered.should have_content(name)
+    end
   end
 
   it "shows an edit link for the clients" do
     render
-    clients.each do |c|
-      rendered.should have_selector("a#edit_client_#{c.id}")
-    end
+    rendered.should have_selector("a#edit_client_#{client.id}")
   end
 end
 
@@ -32,7 +40,7 @@ describe "clients/new" do
   let(:client) { mock_model(Client) }
 
   before :each do
-    client.stub(:nickname)
+    client.stub(:nickname => nil, :name => nil)
     assign :client, client
   end
 
@@ -41,9 +49,14 @@ describe "clients/new" do
     rendered.should have_content("New client")
   end
 
-  it "has a nickname field" do
+  it "has a nickname text field" do
     render
     rendered.should have_selector("#client_nickname")
+  end
+
+  it "has a name text field" do
+    render
+    rendered.should have_selector("#client_name")
   end
 
   it "has a submit button" do
@@ -56,7 +69,7 @@ describe "clients/edit" do
   let(:client) { mock_model(Client) }
 
   before :each do
-    client.stub(:nickname)
+    client.stub(:nickname => nil, :name => nil)
     assign :client, client
   end
 
@@ -73,6 +86,16 @@ describe "clients/edit" do
   it "has a nickname text field for the client" do
     render
     rendered.should have_selector("#client_nickname")
+  end
+
+  it "has a label for the name field" do
+    render
+    rendered.should have_content("Name")
+  end
+
+  it "has a name text field for the client" do
+    render
+    rendered.should have_selector("#client_name")
   end
 
   it "has a submit button to update the client" do

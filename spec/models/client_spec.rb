@@ -12,4 +12,16 @@ describe Client do
     client.should respond_to :updated_at
     client.should respond_to :updated_at=
   end
+
+  # TODO Spec for nickname is missing
+
+  it "isn't valid without a nickname" do
+    client.nickname = nil
+    client.should_not be_valid
+  end
+
+  it "has a name" do
+    client.should respond_to :name
+    client.should respond_to :name=
+  end
 end

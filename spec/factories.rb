@@ -4,6 +4,6 @@ FactoryGirl.define do
   end
 
   factory :client do
-    nickname "Stradivarius" # TODO Use shams for the nickname
+    nickname "Acme" # TODO Use shams for the nickname
   end
 end

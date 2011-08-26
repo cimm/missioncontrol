@@ -7,12 +7,12 @@ Feature: Know my clients
     When I add a client
     Then the client has been added
 
-  Scenario: list the client's nicknames
+  Scenario: list the clients
     Given I added a client
     When I list the clients
-    Then I see the nickname of the client
+    Then I see the list of clients
 
-  Scenario: edit a client
+  Scenario: update a client
     Given I added a client
-    When I edit the client's nickname
-    Then I see the client's new nickname
+    When I update the client
+    Then the client has been updated
