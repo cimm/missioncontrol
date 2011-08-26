@@ -87,11 +87,6 @@ describe UnitsController do
       Unit.stub(:find => unit)
     end
 
-    it "renders the edit page" do
-      get :edit, :id => unit_id
-      response.should render_template(:edit)
-    end
-
     it "gets the unit to edit" do
       Unit.should_receive(:find).with(unit_id)
       get :edit, :id => unit_id
@@ -100,6 +95,11 @@ describe UnitsController do
     it "assigns the unit" do
       get :edit, :id => unit_id
       assigns(:unit).should eql unit
+    end
+
+    it "renders the edit page" do
+      get :edit, :id => unit_id
+      response.should render_template(:edit)
     end
   end
 
