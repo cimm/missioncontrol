@@ -16,6 +16,10 @@ ActiveRecord::Schema.define(:version => 20110817171218) do
   create_table "clients", :force => true do |t|
     t.string   "nickname",   :null => false
     t.string   "name"
+    t.string   "street"
+    t.string   "postcode"
+    t.string   "city"
+    t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

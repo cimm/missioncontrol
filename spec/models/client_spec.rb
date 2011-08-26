@@ -27,4 +27,19 @@ describe Client do
     client.should respond_to :name
     client.should respond_to :name=
   end
+
+  it "has a postcode" do
+    client.should respond_to :postcode
+    client.should respond_to :postcode=
+  end
+
+  it "has a city" do
+    client.should respond_to :city
+    client.should respond_to :city=
+  end
+
+  it "has a country" do
+    client.should respond_to :country
+    client.should respond_to :country=
+  end
 end

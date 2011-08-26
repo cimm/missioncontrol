@@ -6,6 +6,10 @@ When /^I add a client$/ do
   visit new_client_path
   fill_in "Nickname", :with => "Acme"
   fill_in "Name",     :with => "Acme Corporation"
+  fill_in "Street",   :with => "Bondgenotenlaan 1"
+  fill_in "Postcode", :with => "3000"
+  fill_in "City",     :with => "Leuven"
+  fill_in "Country",  :with => "Belgium"
   click_button "Add client"
 end
 
@@ -18,6 +22,10 @@ When /^I update the client$/ do
   click_link "edit"
   fill_in "Nickname", :with => "Prime"
   fill_in "Name",     :with => "Prime Corporation"
+  fill_in "Street",   :with => "Keyworth Street 1"
+  fill_in "Postcode", :with => "SE10AA"
+  fill_in "City",     :with => "London"
+  fill_in "Country",  :with => "United Kingdom"
   click_button "Update"
 end
 
@@ -29,6 +37,10 @@ Then /^the client has been updated$/ do
   @client.reload
   @client.nickname.should eql "Prime"
   @client.name.should     eql "Prime Corporation"
+  @client.street.should   eql "Keyworth Street 1"
+  @client.postcode.should eql "SE10AA"
+  @client.city.should     eql "London"
+  @client.country.should  eql "United Kingdom"
 end
 
 Then /^I see the list of clients$/ do

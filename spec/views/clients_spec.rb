@@ -40,7 +40,7 @@ describe "clients/new" do
   let(:client) { mock_model(Client) }
 
   before :each do
-    client.stub(:nickname => nil, :name => nil)
+    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil)
     assign :client, client
   end
 
@@ -49,14 +49,64 @@ describe "clients/new" do
     rendered.should have_content("New client")
   end
 
+  it "has a label for the nickname field" do
+    render
+    rendered.should have_content("Nickname")
+  end
+
   it "has a nickname text field" do
     render
     rendered.should have_selector("#client_nickname")
   end
 
+  it "has a label for the name field" do
+    render
+    rendered.should have_content("Name")
+  end
+
   it "has a name text field" do
     render
     rendered.should have_selector("#client_name")
+  end
+
+  it "has a label for the street field" do
+    render
+    rendered.should have_content("Street")
+  end
+
+  it "has a street text field" do
+    render
+    rendered.should have_selector("#client_street")
+  end
+
+  it "has a label for the postcode field" do
+    render
+    rendered.should have_content("Postcode")
+  end
+
+  it "has a postcode text field" do
+    render
+    rendered.should have_selector("#client_postcode")
+  end
+
+  it "has a label for the city field" do
+    render
+    rendered.should have_content("City")
+  end
+
+  it "has a city text field" do
+    render
+    rendered.should have_selector("#client_city")
+  end
+
+  it "has a label for the country field" do
+    render
+    rendered.should have_content("Country")
+  end
+
+  it "has a country text field" do
+    render
+    rendered.should have_selector("#client_country")
   end
 
   it "has a submit button" do
@@ -69,7 +119,7 @@ describe "clients/edit" do
   let(:client) { mock_model(Client) }
 
   before :each do
-    client.stub(:nickname => nil, :name => nil)
+    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil)
     assign :client, client
   end
 
@@ -96,6 +146,46 @@ describe "clients/edit" do
   it "has a name text field for the client" do
     render
     rendered.should have_selector("#client_name")
+  end
+
+  it "has a label for the street field" do
+    render
+    rendered.should have_content("Street")
+  end
+
+  it "has a street text field for the client" do
+    render
+    rendered.should have_selector("#client_street")
+  end
+
+  it "has a label for the postcode field" do
+    render
+    rendered.should have_content("Postcode")
+  end
+
+  it "has a postcode text field for the client" do
+    render
+    rendered.should have_selector("#client_postcode")
+  end
+
+  it "has a label for the city field" do
+    render
+    rendered.should have_content("City")
+  end
+
+  it "has a city text field" do
+    render
+    rendered.should have_selector("#client_city")
+  end
+
+  it "has a label for the country field" do
+    render
+    rendered.should have_content("Country")
+  end
+
+  it "has a country text field for the client" do
+    render
+    rendered.should have_selector("#client_country")
   end
 
   it "has a submit button to update the client" do
