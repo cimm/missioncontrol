@@ -11,3 +11,8 @@ Feature: Know my clients
     Given I added a client
     When I list the clients
     Then I see the nickname of the client
+
+  Scenario: edit a client
+    Given I added a client
+    When I edit the client's nickname
+    Then I see the client's new nickname

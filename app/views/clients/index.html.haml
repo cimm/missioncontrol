@@ -4,3 +4,4 @@
   - @clients.each do |client|
     %li
       = client.nickname
+      = link_to "edit", edit_client_path(client), :id => "edit_client_#{client.id}"

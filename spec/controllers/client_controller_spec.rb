@@ -74,4 +74,57 @@ describe ClientsController do
       response.should redirect_to(:action => "index")
     end
   end
+
+  describe "edit" do
+    let(:client_id) { "Id for the edited client" }
+
+    before :each do
+      Client.stub(:find => client)
+    end
+
+    it "gets the client to edit" do
+      Client.should_receive(:find).with(client_id)
+      get :edit, :id => client_id
+    end
+
+    it "assigns the client" do
+      get :edit, :id => client_id
+      assigns(:client).should eql client
+    end
+
+    it "renders the edit page" do
+      get :edit, :id => client_id
+      response.should render_template(:edit)
+    end
+  end
+
+  describe "update" do
+    let(:client_id) { "Id for the updated client" }
+    let(:params)    { {} }
+
+    before :each do
+      Client.stub(:find => client)
+      client.stub(:update_attributes)
+    end
+
+    it "gets the client to update" do
+      Client.should_receive(:find).with(client_id)
+      put :update, :id => client_id, :client => params
+    end
+
+    it "updates and persists the client" do
+      client.should_receive(:update_attributes).with(params)
+      put :update, :id => client_id, :client => params
+    end
+
+    it "assigns a flash message" do
+      put :update, :id => client_id, :client => params
+      flash[:notice].should_not be_nil
+    end
+
+    it "redirects to the clients index page" do
+      put :update, :id => client_id, :client => params
+      response.should redirect_to(:action => "index")
+    end
+  end
 end
