@@ -105,7 +105,7 @@ describe UnitsController do
 
   describe "update" do
     let(:unit_id) { "Id for the updated unit" }
-    let(:params) { {} }
+    let(:params)  { {} }
 
     before :each do
       Unit.stub(:find => unit)
@@ -117,7 +117,7 @@ describe UnitsController do
       put :update, :id => unit_id, :unit => params
     end
 
-    it "updates and persits the unit" do
+    it "updates and persists the unit" do
       unit.should_receive(:update_attributes).with(params)
       put :update, :id => unit_id, :unit => params
     end
