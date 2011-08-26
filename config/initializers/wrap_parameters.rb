@@ -1,5 +1,7 @@
-ActionController::Base.wrap_parameters :format => [:json]
+ActiveSupport.on_load(:action_controller) do
+  wrap_parameters format: [:json]
+end
 
-if defined?(ActiveRecord)
-  ActiveRecord::Base.include_root_in_json = false
+ActiveSupport.on_load(:active_record) do
+  self.include_root_in_json = false
 end

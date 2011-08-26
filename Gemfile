@@ -1,13 +1,16 @@
 source :rubygems
 
-gem 'rails', '3.1.0.rc5'
+gem 'rails', '3.1.0.rc6'
 gem 'sqlite3'
 gem 'haml'
 gem 'json'
-gem 'sass-rails', "~> 3.1.0.rc"
-gem 'coffee-script'
-gem 'uglifier'
 gem 'jquery-rails'
+
+group :assets do
+  gem 'sass-rails', '~> 3.1.0.rc'
+  gem 'coffee-rails', '~> 3.1.0.rc'
+  gem 'uglifier'
+end
 
 group :test do
   gem 'rspec-rails'
