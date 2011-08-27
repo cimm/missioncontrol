@@ -1,6 +1,5 @@
 %h1 Units
-= form_for @unit, :url => units_path do |f|
-  -# TODO URL param only needed for RSpec?
+= form_for @unit do |f|
   = f.date_select :executed_at
   = f.submit "Add unit"
 

@@ -1,4 +1,4 @@
 %h1 Edit client
-= form_for @client, :url => client_path(@client) do |f|
+= form_for @client do |f|
   = render :partial => "form", :object => f
   = f.submit "Update client"
