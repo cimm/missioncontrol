@@ -71,14 +71,19 @@ describe "units/edit" do
     rendered.should have_content("Edit unit")
   end
 
-  it "has an executed date fields for the unit" do
+  it "has a label for the executed date fields" do
+    render
+    rendered.should have_content("Executed at")
+  end
+
+  it "has executed date fields" do
     render
     rendered.should have_selector("#unit_executed_at_1i")
     rendered.should have_selector("#unit_executed_at_2i")
     rendered.should have_selector("#unit_executed_at_3i")
   end
 
-  it "has a submit button to update the unit" do
+  it "has a submit button" do
     render
     rendered.should have_button("Update unit")
   end

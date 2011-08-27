@@ -2,10 +2,11 @@
 %html
   %head
     %title Invoicr
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag    "/stylesheets/bootstrap-1.1.1.min.css"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    - flash.each do |name, msg|
-      = content_tag :div, msg, :id => "flash_#{name}"
-    = yield
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :class => "alert-message #{name}"
+      = yield

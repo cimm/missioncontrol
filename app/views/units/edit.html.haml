@@ -1,4 +1,6 @@
 %h1 Edit unit
+
 = form_for @unit do |f|
-  = f.date_select :executed_at
-  = f.submit "Update unit"
+  = render :partial => "form", :object => f
+  .actions
+    = f.submit "Update unit", :class => "btn primary"

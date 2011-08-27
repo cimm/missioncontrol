@@ -1,13 +1,19 @@
 %h1 Units
+
 = form_for @unit do |f|
   = f.date_select :executed_at
-  = f.submit "Add unit"
+  = f.submit "Add unit", :class => "btn primary"
 
-%ul
-  - @units.each do |unit|
-    %li
-      = unit.executed_at
-      = link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}"
+%table.zebra-striped
+  %thead
+    %tr
+      %th Executed at
+      %th
+  %tbody
+    - @units.each do |unit|
+      %tr
+        %td= unit.executed_at
+        %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
 
 %p
   Total:

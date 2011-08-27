@@ -1,6 +1,6 @@
 %h1 Clients
 
-%table
+%table.zebra-striped
   %thead
     %tr
       %th Nickname
@@ -11,4 +11,4 @@
       %tr
         %td.nickname= client.nickname
         %td.name= client.name
-        %td= link_to "edit", edit_client_path(client), :id => "edit_client_#{client.id}"
+        %td= link_to "edit", edit_client_path(client), :id => "edit_client_#{client.id}", :class => "btn small"

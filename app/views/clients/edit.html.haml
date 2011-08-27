@@ -1,4 +1,6 @@
 %h1 Edit client
+
 = form_for @client do |f|
   = render :partial => "form", :object => f
-  = f.submit "Update client"
+  .actions
+    = f.submit "Update client", :class => "btn primary"
