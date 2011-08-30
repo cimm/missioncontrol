@@ -13,6 +13,11 @@ When /^I add a client$/ do
   click_button "Add client"
 end
 
+When /^I try to add an empty client$/ do
+  visit new_client_path
+  click_button "Add client"
+end
+
 When /^I list the clients$/ do
   visit clients_path
 end
@@ -31,6 +36,10 @@ end
 
 Then /^the client has been added$/ do
   Client.count.should eql 1
+end
+
+Then /^the client has not been added$/ do
+  Client.count.should eql 0
 end
 
 Then /^the client has been updated$/ do

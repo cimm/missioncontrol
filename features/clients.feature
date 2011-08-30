@@ -7,6 +7,10 @@ Feature: Know my clients
     When I add a client
     Then the client has been added
 
+  Scenario: add an empty client
+    When I try to add an empty client
+    Then the client has not been added
+
   Scenario: list the clients
     Given I added a client
     When I list the clients

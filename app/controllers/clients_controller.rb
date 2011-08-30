@@ -8,10 +8,13 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client = Client.new(params[:client])
-    client.save!
-    flash[:notice] = "Client added"
-    redirect_to(:action => "index")
+    @client = Client.new(params[:client])
+    if @client.save
+      redirect_to clients_path, :notice => "Client added"
+    else
+      flash[:error] = "Client not added"
+      render :new
+    end
   end
 
   def edit

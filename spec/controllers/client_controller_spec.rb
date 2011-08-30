@@ -51,7 +51,7 @@ describe ClientsController do
     let(:params) { {} }
 
     before :each do
-      client.stub(:save!)
+      client.stub(:save)
     end
 
     it "creates a new client" do
@@ -59,19 +59,47 @@ describe ClientsController do
       post :create, :client => params
     end
 
-    it "persists the client" do
-      client.should_receive(:save!)
+    it "assigns the client" do
+      post :create, :client => params
+      assigns(:client).should eql client
+    end
+
+    it "tries to persist the client" do
+      client.should_receive(:save)
       post :create, :client => params
     end
 
-    it "assigns a flash message" do
-      post :create, :client => params
-      flash[:notice].should_not be_nil
+    context "is valid" do
+      before :each do
+        client.stub(:save => true)
+      end
+
+      it "assigns a flash message" do
+        post :create, :client => params
+        flash[:notice].should_not be_nil
+      end
+
+      it "redirects to the clients index page" do
+        post :create, :client => params
+        response.should redirect_to(:action => "index")
+      end
     end
 
-    it "redirects to the clients index page" do
-      post :create, :client => params
-      response.should redirect_to(:action => "index")
+    context "is not valid" do
+      before :each do
+        client.stub(:save => false)
+      end
+
+      it "assigns a non-sticky error flash message" do
+        post :create, :client => params
+        flash.now[:error].should_not be_nil
+        # TODO Isn't realy testing the flash.now at the moment
+      end
+
+      it "renders the new page" do
+        post :create, :client => params
+        response.should render_template(:new)
+      end
     end
   end
 
