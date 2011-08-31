@@ -122,4 +122,9 @@ describe "units/edit" do
     render
     rendered.should have_button("Update unit")
   end
+
+  it "has a cancel link" do
+    render
+    rendered.should have_link("cancel")
+  end
 end

@@ -3,7 +3,8 @@ Given /^I have a client$/ do
 end
 
 When /^I add a client$/ do
-  visit new_client_path
+  visit clients_path
+  click_link "New"
   fill_in "Nickname", :with => "Acme"
   fill_in "Name",     :with => "Acme Corporation"
   fill_in "Street",   :with => "Bondgenotenlaan 1"

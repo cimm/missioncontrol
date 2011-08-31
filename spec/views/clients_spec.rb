@@ -16,6 +16,11 @@ describe "clients/index" do
     rendered.should have_content("Clients")
   end
 
+  it "has a link to create a new client" do
+    render
+    rendered.should have_link("New")
+  end
+
   it "shows the nicknames of the clients" do
     render
     rendered.should have_css(".nickname") do
@@ -113,6 +118,11 @@ describe "clients/new" do
     render
     rendered.should have_button("Add client")
   end
+
+  it "has a cancel link" do
+    render
+    rendered.should have_link("cancel")
+  end
 end
 
 describe "clients/edit" do
@@ -191,5 +201,10 @@ describe "clients/edit" do
   it "has a submit button to update the client" do
     render
     rendered.should have_button("Update client")
+  end
+
+  it "has a cancel link" do
+    render
+    rendered.should have_link("cancel")
   end
 end
