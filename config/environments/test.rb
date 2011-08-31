@@ -9,4 +9,5 @@ Invoicr::Application.configure do
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.delivery_method              = :test
   config.active_support.deprecation                 = :stderr
+  config.assets.allow_debugging                     = true
 end
