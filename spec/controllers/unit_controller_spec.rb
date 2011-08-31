@@ -9,11 +9,13 @@ describe UnitsController do
 
   describe "index" do
     let(:units)       { mock("All units") }
+    let(:clients)     { [mock("Client")] }
     let(:total_units) { mock("Total number of units")}
 
     before :each do
       Unit.stub(:all => units)
       units.stub(:count => total_units)
+      Client.stub(:all => clients)
     end
 
     it "creates a new unit" do
@@ -36,6 +38,16 @@ describe UnitsController do
       assigns(:units).should eql units
     end
 
+    it "assigns all the clients" do
+      Client.should_receive(:all)
+      get :index
+    end
+
+    it "assigns all the clients" do
+      get :index
+      assigns(:clients).should eql clients
+    end
+
     it "gets the total number of units" do
       units.should_receive(:count)
       get :index
@@ -56,7 +68,7 @@ describe UnitsController do
     let(:params) { {} }
 
     before :each do
-      unit.stub(:save!)
+      unit.stub(:save)
     end
 
     it "creates a new unit" do
@@ -64,14 +76,31 @@ describe UnitsController do
       post :create, :unit => params
     end
 
-    it "persists the unit" do
-      unit.should_receive(:save!)
+    it "tries to persist the unit" do
+      unit.should_receive(:save)
       post :create, :unit => params
     end
 
-    it "assigns a flash message" do
-      post :create, :unit => params
-      flash[:notice].should_not be_nil
+    context "is valid" do
+      before :each do
+        unit.stub(:save => true)
+      end
+
+      it "assigns a flash message" do
+        post :create, :unit => params
+        flash[:notice].should_not be_nil
+      end
+    end
+
+    context "is not valid" do
+      before :each do
+        unit.stub(:save => false)
+      end
+
+      it "assigns an error flash message" do
+        post :create, :unit => params
+        flash[:error].should_not be_nil
+      end
     end
 
     it "redirects to the units index page" do
@@ -82,9 +111,11 @@ describe UnitsController do
 
   describe "edit" do
     let(:unit_id) { "Id for the edited unit" }
+    let(:clients) { [mock("Client")] }
 
     before :each do
       Unit.stub(:find => unit)
+      Client.stub(:all => clients)
     end
 
     it "gets the unit to edit" do
@@ -95,6 +126,16 @@ describe UnitsController do
     it "assigns the unit" do
       get :edit, :id => unit_id
       assigns(:unit).should eql unit
+    end
+
+    it "gets all the clients" do
+      Client.should_receive(:all)
+      get :edit, :id => unit_id
+    end
+
+    it "assigns all the clients" do
+      get :edit, :id => unit_id
+      assigns(:clients).should eql clients
     end
 
     it "renders the edit page" do

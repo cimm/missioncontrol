@@ -93,7 +93,7 @@ describe ClientsController do
       it "assigns a non-sticky error flash message" do
         post :create, :client => params
         flash.now[:error].should_not be_nil
-        # TODO Isn't realy testing the flash.now at the moment
+        # TODO Isn't testing the "stickyness" at the moment
       end
 
       it "renders the new page" do

@@ -6,6 +6,7 @@ Sham.nickname    {|n| "Acme #{n}"}
 FactoryGirl.define do
   factory :unit do
     executed_at
+    client
   end
 
   factory :client do

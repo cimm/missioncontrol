@@ -12,11 +12,11 @@ Feature: Know my clients
     Then the client has not been added
 
   Scenario: list the clients
-    Given I added a client
+    Given I have a client
     When I list the clients
     Then I see the list of clients
 
   Scenario: update a client
-    Given I added a client
+    Given I have a client
     When I update the client
     Then the client has been updated

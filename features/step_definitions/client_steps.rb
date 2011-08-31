@@ -1,4 +1,4 @@
-Given /^I added a client$/ do
+Given /^I have a client$/ do
   @client = FactoryGirl.create(:client)
 end
 
