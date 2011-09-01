@@ -42,4 +42,9 @@ describe Client do
     client.should respond_to :country
     client.should respond_to :country=
   end
+
+  it "has a VAT number" do
+    client.should respond_to :vat_number
+    client.should respond_to :vat_number=
+  end
 end

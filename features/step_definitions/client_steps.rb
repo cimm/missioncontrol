@@ -5,12 +5,13 @@ end
 When /^I add a client$/ do
   visit clients_path
   click_link "New"
-  fill_in "Nickname", :with => "Acme"
-  fill_in "Name",     :with => "Acme Corporation"
-  fill_in "Street",   :with => "Bondgenotenlaan 1"
-  fill_in "Postcode", :with => "3000"
-  fill_in "City",     :with => "Leuven"
-  fill_in "Country",  :with => "Belgium"
+  fill_in "Nickname",   :with => "Acme"
+  fill_in "Name",       :with => "Acme Corporation"
+  fill_in "Street",     :with => "Bondgenotenlaan 1"
+  fill_in "Postcode",   :with => "3000"
+  fill_in "City",       :with => "Leuven"
+  fill_in "Country",    :with => "Belgium"
+  fill_in "VAT number", :with => "0999999999"
   click_button "Add client"
 end
 
@@ -26,12 +27,13 @@ end
 When /^I update the client$/ do
   visit clients_path
   click_link "edit"
-  fill_in "Nickname", :with => "Prime"
-  fill_in "Name",     :with => "Prime Corporation"
-  fill_in "Street",   :with => "Keyworth Street 1"
-  fill_in "Postcode", :with => "SE10AA"
-  fill_in "City",     :with => "London"
-  fill_in "Country",  :with => "United Kingdom"
+  fill_in "Nickname",   :with => "Prime"
+  fill_in "Name",       :with => "Prime Corporation"
+  fill_in "Street",     :with => "Keyworth Street 1"
+  fill_in "Postcode",   :with => "SE10AA"
+  fill_in "City",       :with => "London"
+  fill_in "Country",    :with => "United Kingdom"
+  fill_in "VAT number", :with => "999 9999 73"
   click_button "Update"
 end
 
@@ -45,12 +47,13 @@ end
 
 Then /^the client has been updated$/ do
   @client.reload
-  @client.nickname.should eql "Prime"
-  @client.name.should     eql "Prime Corporation"
-  @client.street.should   eql "Keyworth Street 1"
-  @client.postcode.should eql "SE10AA"
-  @client.city.should     eql "London"
-  @client.country.should  eql "United Kingdom"
+  @client.nickname.should    eql "Prime"
+  @client.name.should        eql "Prime Corporation"
+  @client.street.should      eql "Keyworth Street 1"
+  @client.postcode.should    eql "SE10AA"
+  @client.city.should        eql "London"
+  @client.country.should     eql "United Kingdom"
+  @client.vat_number.should  eql "999 9999 73"
 end
 
 Then /^I see the list of clients$/ do

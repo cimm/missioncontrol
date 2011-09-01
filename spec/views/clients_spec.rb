@@ -45,7 +45,7 @@ describe "clients/new" do
   let(:client) { mock_model(Client) }
 
   before :each do
-    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil)
+    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil, :vat_number => nil)
     assign :client, client
   end
 
@@ -114,6 +114,16 @@ describe "clients/new" do
     rendered.should have_selector("#client_country")
   end
 
+  it "has a label for the VAT number field" do
+    render
+    rendered.should have_content("VAT number")
+  end
+
+  it "has a VAT number text field" do
+    render
+    rendered.should have_selector("#client_vat_number")
+  end
+
   it "has a submit button" do
     render
     rendered.should have_button("Add client")
@@ -129,7 +139,7 @@ describe "clients/edit" do
   let(:client) { mock_model(Client) }
 
   before :each do
-    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil)
+    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil, :vat_number => nil)
     assign :client, client
   end
 
@@ -196,6 +206,16 @@ describe "clients/edit" do
   it "has a country text field for the client" do
     render
     rendered.should have_selector("#client_country")
+  end
+
+  it "has a label for the VAT number field" do
+    render
+    rendered.should have_content("VAT number")
+  end
+
+  it "has a VAT number text field" do
+    render
+    rendered.should have_selector("#client_vat_number")
   end
 
   it "has a submit button to update the client" do

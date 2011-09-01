@@ -7,6 +7,7 @@ class AddClients < ActiveRecord::Migration
       t.string :postcode
       t.string :city
       t.string :country
+      t.string :vat_number
       t.timestamps
     end
     add_index :clients, :nickname

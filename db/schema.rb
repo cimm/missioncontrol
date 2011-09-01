@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110817171218) do
     t.string   "postcode"
     t.string   "city"
     t.string   "country"
+    t.string   "vat_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
