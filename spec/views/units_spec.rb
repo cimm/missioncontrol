@@ -79,8 +79,8 @@ end
 describe "units/edit" do
   let(:unit)     { mock_model(Unit) }
   let(:client)   { mock_model(Client) }
-  let(:clients)  { [client] }
   let(:nickname) { "Acme" }
+  let(:clients)  { [client] }
 
   before :each do
     unit.stub(:executed_at => nil, :client_id => client)
@@ -89,7 +89,7 @@ describe "units/edit" do
     assign :clients, clients
   end
 
-  it "should have a title" do
+  it "has a title" do
     render
     rendered.should have_content("Edit unit")
   end

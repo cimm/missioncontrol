@@ -1,0 +1,14 @@
+%h1 Projects
+
+= link_to "New", new_project_path, :class => "btn"
+
+%table.zebra-striped
+  %thead
+    %tr
+      %th Name
+      %th
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td.name= project.name
+        %td= link_to "edit", edit_project_path(project), :id => "edit_project_#{project.id}", :class => "btn small"

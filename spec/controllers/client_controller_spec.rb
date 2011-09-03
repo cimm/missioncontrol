@@ -54,7 +54,7 @@ describe ClientsController do
       client.stub(:save)
     end
 
-    it "creates a new client" do
+    it "builds a new client" do
       Client.should_receive(:new).with(params)
       post :create, :client => params
     end

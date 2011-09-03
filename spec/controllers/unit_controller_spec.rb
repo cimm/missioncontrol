@@ -38,7 +38,7 @@ describe UnitsController do
       assigns(:units).should eql units
     end
 
-    it "assigns all the clients" do
+    it "gets all the clients" do
       Client.should_receive(:all)
       get :index
     end
@@ -71,7 +71,7 @@ describe UnitsController do
       unit.stub(:save)
     end
 
-    it "creates a new unit" do
+    it "builds a new unit" do
       Unit.should_receive(:new).with(params)
       post :create, :unit => params
     end

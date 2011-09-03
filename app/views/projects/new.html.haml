@@ -1,0 +1,8 @@
+%h1 New project
+
+= form_for @project do |f|
+  = render :partial => "form", :object => f
+  .actions
+    = f.submit "Add project", :class => "btn primary"
+    or
+    = link_to "cancel", projects_path

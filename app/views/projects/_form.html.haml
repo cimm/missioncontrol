@@ -1,0 +1,7 @@
+.clearfix
+  = form.label :name
+  .input
+    = form.text_field :name
+  = form.label :client_id
+  .input
+    = form.select :client_id, @clients.collect {|c| [c.nickname, c.id]}

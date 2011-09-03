@@ -143,7 +143,7 @@ describe "clients/edit" do
     assign :client, client
   end
 
-  it "should have a title" do
+  it "has a title" do
     render
     rendered.should have_content("Edit client")
   end
