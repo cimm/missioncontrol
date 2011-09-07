@@ -22,4 +22,38 @@ describe Unit do
     unit.executed_at = nil
     unit.should_not be_valid
   end
+
+  it "belongs to a project" do
+    unit.should respond_to :project
+    unit.should respond_to :project=
+  end
+
+  it "isn't valid without a project" do
+    unit.project = nil
+    unit.should_not be_valid
+  end
+
+  describe "project_name" do
+    let(:project) { mock("Project") }
+    let(:name)    { mock("Name") }
+
+    before :each do
+      unit.stub(:project => project)
+      project.stub(:name => name)
+    end
+
+    it "gets the project" do
+      unit.should_receive(:project).and_return(project)
+      unit.project_name
+    end
+
+    it "gets the name from the project" do
+      project.should_receive(:name).and_return(name)
+      unit.project_name
+    end
+
+    it "returns the project's name" do
+      unit.project_name.should eql name
+    end
+  end
 end

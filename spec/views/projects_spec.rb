@@ -97,14 +97,13 @@ end
 describe "projects/edit" do
   let(:project)  { mock_model(Project) }
   let(:client)   { mock_model(Client)}
-  let(:nickname) { "Acme" }
   let(:clients)  { [client] }
+  let(:nickname) { "Acme" }
 
   before :each do
-    project.stub(:name => nil, :client_id => client)
+    project.stub(:name => nil, :client_id => nil)
     client.stub(:nickname => nickname)
     assign :project, project
-    assign :client,  client
     assign :clients, clients
   end
 

@@ -4,7 +4,7 @@ Feature: Track units spent
   I can track the units spent on a project
 
   Scenario: add a unit
-    Given I have a client
+    Given I have a project
     When I add a unit
     Then the unit has been added
 

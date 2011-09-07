@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :client
-  validates :name,   :presence => true
-  validates :client, :presence => true
+  validates  :name,   :presence => true
+  validates  :client, :presence => true
 
   def client_nickname
     client.nickname

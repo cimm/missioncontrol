@@ -2,7 +2,7 @@ class UnitsController < ApplicationController
   def index
     @unit        = Unit.new
     @units       = Unit.all
-    @clients     = Client.all
+    @projects    = Project.all
     @total_units = @units.count
   end
 
@@ -17,8 +17,8 @@ class UnitsController < ApplicationController
   end
 
   def edit
-    @unit    = Unit.find(params[:id])
-    @clients = Client.all
+    @unit     = Unit.find(params[:id])
+    @projects = Project.all
   end
 
   def update

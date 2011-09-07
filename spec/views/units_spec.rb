@@ -3,13 +3,18 @@ require "spec_helper"
 describe "units/index" do
   let(:unit)        { mock_model(Unit) }
   let(:units)       { [unit] }
+  let(:project)     { mock_model(Project) }
+  let(:projects)    { [project] }
+  let(:name)        { "Project Stradivarius" }
   let(:executed_at) { Date.today }
   let(:total_units) { mock("Total number of units") }
 
   before :each do
-    unit.stub(:executed_at => executed_at)
+    unit.stub(:executed_at => executed_at, :project_id => nil, :project_name => name)
+    project.stub(:name => name)
     assign :unit,        unit
     assign :units,       units
+    assign :projects,    projects
     assign :total_units, total_units
   end
 
@@ -21,6 +26,11 @@ describe "units/index" do
   it "shows the date the units were executed" do
     render
     rendered.should have_tag("td", :with => {:class => "executed_at"}, :text => /#{executed_at}/i)
+  end
+
+  it "shows the project names for the units" do
+    render
+    rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
   end
 
   it "shows an edit link for the units" do
@@ -47,6 +57,13 @@ describe "units/index" do
     end
   end
 
+  it "has a project field for the new unit" do
+    render
+    rendered.should have_tag("select", :with => {:id => "unit_project_id"}) do
+      with_tag "option", :with => {:value => project.id}, :text => /#{name}/i
+    end
+  end
+
   it "has a submit button to add the new unit" do
     render
     rendered.should have_button("Add unit")
@@ -60,10 +77,15 @@ end
 
 describe "units/edit" do
   let(:unit)     { mock_model(Unit) }
+  let(:project)  { mock_model(Project) }
+  let(:projects) { [project] }
+  let(:name)     { "Project Stradivarius" }
 
   before :each do
-    unit.stub(:executed_at => nil)
+    unit.stub(:executed_at => nil, :project_id => nil)
+    project.stub(:name => name)
     assign :unit, unit
+    assign :projects, projects
   end
 
   it "has a title" do
@@ -81,6 +103,18 @@ describe "units/edit" do
     rendered.should have_selector("#unit_executed_at_1i")
     rendered.should have_selector("#unit_executed_at_2i")
     rendered.should have_selector("#unit_executed_at_3i")
+  end
+
+  it "has a label for the project field" do
+    render
+    rendered.should have_content("Project")
+  end
+
+  it "has a project field" do
+    render
+    rendered.should have_tag("select", :with => {:id => "unit_project_id"}) do
+      with_tag "option", :with => {:value => project.id}, :text => /#{name}/i
+    end
   end
 
   it "has a submit button" do

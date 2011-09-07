@@ -9,13 +9,13 @@ describe UnitsController do
 
   describe "index" do
     let(:units)       { mock("All units") }
-    let(:clients)     { [mock("Client")] }
+    let(:projects)    { [mock("Project")] }
     let(:total_units) { mock("Total number of units")}
 
     before :each do
       Unit.stub(:all => units)
       units.stub(:count => total_units)
-      Client.stub(:all => clients)
+      Project.stub(:all => projects)
     end
 
     it "creates a new unit" do
@@ -38,14 +38,14 @@ describe UnitsController do
       assigns(:units).should eql units
     end
 
-    it "gets all the clients" do
-      Client.should_receive(:all)
+    it "gets all the projects" do
+      Project.should_receive(:all)
       get :index
     end
 
-    it "assigns all the clients" do
+    it "assigns all the projects" do
       get :index
-      assigns(:clients).should eql clients
+      assigns(:projects).should eql projects
     end
 
     it "gets the total number of units" do
@@ -110,12 +110,12 @@ describe UnitsController do
   end
 
   describe "edit" do
-    let(:unit_id) { "Id for the edited unit" }
-    let(:clients) { [mock("Client")] }
+    let(:unit_id)  { "Id for the edited unit" }
+    let(:projects) { [mock("Project")] }
 
     before :each do
       Unit.stub(:find => unit)
-      Client.stub(:all => clients)
+      Project.stub(:all => projects)
     end
 
     it "gets the unit to edit" do
@@ -128,14 +128,14 @@ describe UnitsController do
       assigns(:unit).should eql unit
     end
 
-    it "gets all the clients" do
-      Client.should_receive(:all)
+    it "gets all the projects" do
+      Project.should_receive(:all)
       get :edit, :id => unit_id
     end
 
-    it "assigns all the clients" do
+    it "assigns all the projects" do
       get :edit, :id => unit_id
-      assigns(:clients).should eql clients
+      assigns(:projects).should eql projects
     end
 
     it "renders the edit page" do

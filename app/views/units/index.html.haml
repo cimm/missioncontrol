@@ -2,17 +2,20 @@
 
 = form_for @unit do |f|
   = f.date_select :executed_at
+  = f.select :project_id, @projects.collect {|p| [p.name, p.id]}
   = f.submit "Add unit", :class => "btn primary"
 
 %table.zebra-striped
   %thead
     %tr
       %th Executed at
+      %th Project
       %th
   %tbody
     - @units.each do |unit|
       %tr
         %td.executed_at= unit.executed_at
+        %td.name= unit.project_name
         %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
 
 %p

@@ -7,7 +7,7 @@ Sham.name        {|n| "Project #{n}"}
 FactoryGirl.define do
   factory :unit do
     executed_at
-    client
+    project
   end
 
   factory :client do
