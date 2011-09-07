@@ -32,4 +32,28 @@ describe Project do
     project.client = nil
     project.should_not be_valid
   end
+
+  describe "client_nickname" do
+    let(:client)   { mock("Client") }
+    let(:nickname) { mock("Nickname") }
+
+    before :each do
+      project.stub(:client => client)
+      client.stub(:nickname => nickname)
+    end
+
+    it "gets the client" do
+      project.should_receive(:client).and_return(client)
+      project.client_nickname
+    end
+
+    it "gets the nickname from the client" do
+      client.should_receive(:nickname).and_return(nickname)
+      project.client_nickname
+    end
+
+    it "returns the client's nickname" do
+      project.client_nickname.should eql nickname
+    end
+  end
 end

@@ -6,9 +6,11 @@
   %thead
     %tr
       %th Name
+      %th Client
       %th
   %tbody
     - @projects.each do |project|
       %tr
         %td.name= project.name
+        %td.nickname= project.client_nickname
         %td= link_to "edit", edit_project_path(project), :id => "edit_project_#{project.id}", :class => "btn small"

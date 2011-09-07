@@ -2,6 +2,3 @@
   = form.label :executed_at
   .input
     = form.date_select :executed_at
-  = form.label :client_id
-  .input
-    = form.select :client_id, @clients.collect {|c| [c.nickname, c.id]}

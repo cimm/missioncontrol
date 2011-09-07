@@ -4,9 +4,12 @@ describe "projects/index" do
   let(:project)  { mock_model(Project) }
   let(:projects) { [project] }
   let(:name)     { "Project Stradivarius" }
+  let(:client)   { mock_model(Client) }
+  let(:nickname) { "Acme" }
 
   before :each do
-    project.stub(:name => name)
+    project.stub(:name => name, :client_nickname => nickname)
+    client.stub(:nickname => nickname)
     assign :projects, projects
   end
 
@@ -23,6 +26,11 @@ describe "projects/index" do
   it "shows the projects names" do
     render
     rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
+  end
+
+  it "shows the client nicknames" do
+    render
+    rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
   end
 
   it "shows an edit link for the projects" do

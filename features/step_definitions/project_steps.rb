@@ -36,4 +36,7 @@ Then /^I see the list of projects$/ do
   within ".name" do
     page.should have_content(@project.name)
   end
+  within ".nickname" do
+    page.should have_content(@project.client_nickname)
+  end
 end

@@ -2,20 +2,17 @@
 
 = form_for @unit do |f|
   = f.date_select :executed_at
-  = f.select :client_id, @clients.collect {|c| [c.nickname, c.id]}
   = f.submit "Add unit", :class => "btn primary"
 
 %table.zebra-striped
   %thead
     %tr
       %th Executed at
-      %th Client
       %th
   %tbody
     - @units.each do |unit|
       %tr
         %td.executed_at= unit.executed_at
-        %td.nickname= unit.client_nickname
         %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
 
 %p
