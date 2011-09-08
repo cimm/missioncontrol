@@ -3,6 +3,7 @@
 = form_for @unit do |f|
   = f.date_select :executed_at
   = f.select :project_id, @projects.collect {|p| [p.name, p.id]}
+  = f.text_field :hours_spent
   = f.submit "Add unit", :class => "btn primary"
 
 %table.zebra-striped
@@ -10,12 +11,14 @@
     %tr
       %th Executed at
       %th Project
+      %th Hours spent
       %th
   %tbody
     - @units.each do |unit|
       %tr
         %td.executed_at= unit.executed_at
         %td.name= unit.project_name
+        %td.hours_spent= formatted_hours(unit.hours_spent)
         %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
 
 %p

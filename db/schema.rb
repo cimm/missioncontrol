@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(:version => 20110902062806) do
   add_index "projects", ["client_id"], :name => "index_projects_on_client_id"
 
   create_table "units", :force => true do |t|
-    t.date     "executed_at", :null => false
-    t.integer  "project_id",  :null => false
+    t.date     "executed_at",                               :null => false
+    t.decimal  "hours_spent", :precision => 4, :scale => 2, :null => false
+    t.integer  "project_id",                                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

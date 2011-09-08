@@ -23,6 +23,26 @@ describe Unit do
     unit.should_not be_valid
   end
 
+  it "has the hours spent" do
+    unit.should respond_to :hours_spent
+    unit.should respond_to :hours_spent=
+  end
+
+  it "isn't valid without the hours spent" do
+    unit.hours_spent = nil
+    unit.should_not be_valid
+  end
+
+  it "isn't valid when more than 24 hours have been spent" do
+    unit.hours_spent = 25
+    unit.should_not be_valid
+  end
+
+  it "isn't valid when zero hours have been spent" do
+    unit.hours_spent = 0
+    unit.should_not be_valid
+  end
+
   it "belongs to a project" do
     unit.should respond_to :project
     unit.should respond_to :project=

@@ -5,3 +5,6 @@
   = form.label :project_id
   .input
     = form.select :project_id, @projects.collect {|p| [p.name, p.id]}
+  = form.label :hours_spent
+  .input
+    = form.text_field :hours_spent

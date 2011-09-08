@@ -4,6 +4,7 @@ gem 'rails', '3.1.0'
 gem 'sqlite3'
 gem 'haml'
 gem 'jquery-rails'
+gem 'dotiw'
 
 group :assets do
   gem 'sass-rails'
