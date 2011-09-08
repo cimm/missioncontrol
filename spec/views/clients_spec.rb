@@ -3,8 +3,8 @@ require "spec_helper"
 describe "clients/index" do
   let(:client)   { mock_model(Client) }
   let(:clients)  { [client] }
-  let(:nickname) { mock("Client's nicknane") }
-  let(:name)     { mock("Client's full name") }
+  let(:nickname) { "Acme" }
+  let(:name)     { "Acme Inc." }
 
   before :each do
     client.stub(:nickname => nickname, :name => name)
@@ -23,16 +23,12 @@ describe "clients/index" do
 
   it "shows the nicknames of the clients" do
     render
-    rendered.should have_css(".nickname") do
-      rendered.should have_content(nickname)
-    end
+    rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
   end
 
   it "shows the names of the clients" do
     render
-    rendered.should have_css(".name") do
-      rendered.should have_content(name)
-    end
+    rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
   end
 
   it "shows an edit link for the clients" do

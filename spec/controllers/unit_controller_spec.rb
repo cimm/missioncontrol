@@ -18,16 +18,6 @@ describe UnitsController do
       Project.stub(:all => projects)
     end
 
-    it "creates a new unit" do
-      Unit.should_receive(:new)
-      get :index
-    end
-
-    it "assigns a new unit" do
-      get :index
-      assigns(:unit).should eql unit
-    end
-
     it "gets all the units" do
       Unit.should_receive(:all)
       get :index
@@ -61,6 +51,40 @@ describe UnitsController do
     it "renders the units page" do
       get :index
       response.should render_template(:index)
+    end
+  end
+
+  describe "new" do
+    let(:project)  { mock("Project") }
+    let(:projects) { [project] }
+
+    before :each do
+      Project.stub(:all => projects)
+    end
+
+    it "creates a new unit" do
+      Unit.should_receive(:new)
+      get :new
+    end
+
+    it "assigns a new unit" do
+      get :new
+      assigns(:unit).should eql unit
+    end
+
+    it "gets all the projects" do
+      Project.should_receive(:all)
+      get :new
+    end
+
+    it "assigns all the projects" do
+      get :new
+      assigns(:projects).should eql projects
+    end
+
+    it "renders the new unit page" do
+      get :new
+      response.should render_template(:new)
     end
   end
 

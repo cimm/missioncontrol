@@ -1,9 +1,12 @@
+World(ActionView::Helpers::DateHelper, TimeHelper)
+
 Given /^I have a unit$/ do
   @unit = FactoryGirl.create(:unit)
 end
 
 When /^I add a unit$/ do
   visit units_path
+  click_link "New"
   fill_in "unit_hours_spent", :with => "4"
   click_button "Add unit"
 end

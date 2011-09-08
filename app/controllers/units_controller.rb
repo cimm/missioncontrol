@@ -1,9 +1,13 @@
 class UnitsController < ApplicationController
   def index
-    @unit        = Unit.new
     @units       = Unit.all
     @projects    = Project.all
     @total_units = @units.count
+  end
+
+  def new
+    @unit     = Unit.new
+    @projects = Project.all
   end
 
   def create

@@ -45,8 +45,8 @@ end
 describe "projects/new" do
   let(:project)  { mock_model(Project) }
   let(:client)   { mock_model(Client)}
-  let(:nickname) { "Acme" }
   let(:clients)  { [client] }
+  let(:nickname) { "Acme" }
 
   before :each do
     project.stub(:name => nil, :client_id => client)

@@ -4,7 +4,6 @@ describe "units/index" do
   let(:unit)                  { mock_model(Unit) }
   let(:units)                 { [unit] }
   let(:project)               { mock_model(Project) }
-  let(:projects)              { [project] }
   let(:name)                  { "Project Stradivarius" }
   let(:hours_spent)           { 8 }
   let(:formatted_hours_spent) { "8 hours" }
@@ -12,18 +11,21 @@ describe "units/index" do
   let(:total_units)           { mock("Total number of units") }
 
   before :each do
-    unit.stub(:executed_at => executed_at, :project_id => nil, :project_name => name, :hours_spent => hours_spent)
+    unit.stub(:executed_at => executed_at, :project_name => name, :hours_spent => hours_spent)
     project.stub(:name => name)
     view.stub(:formatted_hours => formatted_hours_spent)
-    assign :unit,        unit
     assign :units,       units
-    assign :projects,    projects
     assign :total_units, total_units
   end
 
   it "has a title" do
     render
     rendered.should have_content("Units")
+  end
+
+  it "has a link to create a new unit" do
+    render
+    rendered.should have_link("New")
   end
 
   it "shows the date the units were executed" do
@@ -43,7 +45,7 @@ describe "units/index" do
     render
   end
 
-  it "gets the hours spent for the units" do
+  it "formats the hours spent for the units" do
     units.each do |u|
       view.should_receive(:formatted_hours).and_return(formatted_hours_spent)
     end
@@ -57,12 +59,40 @@ describe "units/index" do
 
   it "shows an edit link for the units" do
     render
-    units.each do |u|
-      rendered.should have_selector("a#edit_unit_#{u.id}")
-    end
+    rendered.should have_selector("a#edit_unit_#{unit.id}")
   end
 
-  it "has a executed date fields for the new unit" do
+  it "shows the total units" do
+    render
+    rendered.should have_content("Total: #{total_units} units")
+  end
+end
+
+describe "units/new" do
+  let(:unit)     { mock_model(Unit) }
+  let(:project)  { mock_model(Project) }
+  let(:projects) { [project] }
+  let(:name)     { "Project Stradivarius" }
+
+  before :each do
+    unit.stub(:executed_at => nil, :project_id => nil, :hours_spent => nil)
+    project.stub(:name => name)
+    assign :unit,     unit
+    assign :project,  project
+    assign :projects, projects
+  end
+
+  it "has a title" do
+    render
+    rendered.should have_content("New unit")
+  end
+
+  it "has a label for the executed date fields" do
+    render
+    rendered.should have_content("Executed at")
+  end
+
+  it "has a executed date fields" do
     render
     rendered.should have_selector("#unit_executed_at_1i")
     rendered.should have_selector("#unit_executed_at_2i")
@@ -79,26 +109,36 @@ describe "units/index" do
     end
   end
 
-  it "has a project field for the new unit" do
+  it "has a label for the project field" do
+    render
+    rendered.should have_content("Project")
+  end
+
+  it "has a project field" do
     render
     rendered.should have_tag("select", :with => {:id => "unit_project_id"}) do
       with_tag "option", :with => {:value => project.id}, :text => /#{name}/i
     end
   end
 
-  it "has an hours spent field for the new unit" do
+  it "has a label for the hours spent field" do
+    render
+    rendered.should have_content("Hours spent")
+  end
+
+  it "has an hours spent field" do
     render
     rendered.should have_selector("#unit_hours_spent")
   end
 
-  it "has a submit button to add the new unit" do
+  it "has a submit button" do
     render
     rendered.should have_button("Add unit")
   end
 
-  it "shows the total units" do
+  it "has a cancel link" do
     render
-    rendered.should have_content("Total: #{total_units} units")
+    rendered.should have_link("cancel")
   end
 end
 

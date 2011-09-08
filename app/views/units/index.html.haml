@@ -1,10 +1,6 @@
 %h1 Units
 
-= form_for @unit do |f|
-  = f.date_select :executed_at
-  = f.select :project_id, @projects.collect {|p| [p.name, p.id]}
-  = f.text_field :hours_spent
-  = f.submit "Add unit", :class => "btn primary"
+= link_to "New", new_unit_path, :class => "btn"
 
 %table.zebra-striped
   %thead
