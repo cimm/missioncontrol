@@ -1,10 +1,12 @@
-.clearfox
+.clearfix
   = form.label :executed_at
   .input
     = form.date_select :executed_at
+.clearfix
   = form.label :project_id
   .input
     = form.select :project_id, @projects.collect {|p| [p.name, p.id]}
+.clearfix
   = form.label :hours_spent
   .input
     = form.text_field :hours_spent
