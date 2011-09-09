@@ -6,7 +6,7 @@ if defined?(Bundler)
   Bundler.require *Rails.groups(:assets => %w(development test))
 end
 
-module Invoicr
+module MissionControl
   class Application < Rails::Application
     config.time_zone          = "Brussels"
     config.encoding           = "utf-8"
