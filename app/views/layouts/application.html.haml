@@ -3,9 +3,21 @@
   %head
     %title Mission Control
     = stylesheet_link_tag    "/stylesheets/bootstrap-1.1.1.min.css"
+    = stylesheet_link_tag    "extensions"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+    .topbar
+      .fill
+        .container
+          %h3= link_to "Mission Control", root_path
+          %ul
+            %li{:class => active("units")}
+              = link_to "Units", units_path
+            %li{:class => active("projects")}
+              = link_to "Projects", projects_path
+            %li{:class => active("clients")}
+              = link_to "Clients", clients_path
     .container
       - flash.each do |name, msg|
         = content_tag :div, msg, :class => "alert-message #{name}"

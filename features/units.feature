@@ -3,6 +3,11 @@ Feature: Track units spent
   As a freelancer
   I can track the units spent on a project
 
+  Scenario: open units
+    Given I am on the homepage
+    When I go to the units page
+    Then I am on the units page
+
   Scenario: add a unit
     Given I have a project
     When I add a unit

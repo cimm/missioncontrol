@@ -1,23 +1,22 @@
-%h1 Units
-
-= link_to "New", new_unit_path, :class => "btn"
-
-%table.zebra-striped
-  %thead
-    %tr
-      %th Executed at
-      %th Project
-      %th Hours spent
-      %th
-  %tbody
-    - @units.each do |unit|
+%section#units
+  .page-header
+    %h1 Units
+  = link_to "New", new_unit_path, :class => "btn"
+  %table.zebra-striped
+    %thead
       %tr
-        %td.executed_at= unit.executed_at
-        %td.name= unit.project_name
-        %td.hours_spent= formatted_hours(unit.hours_spent)
-        %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
-
-%p
-  Total:
-  = @total_units
-  units
+        %th Executed at
+        %th Project
+        %th Hours spent
+        %th
+    %tbody
+      - @units.each do |unit|
+        %tr
+          %td.executed_at= unit.executed_at
+          %td.name= unit.project_name
+          %td.hours_spent= formatted_hours(unit.hours_spent)
+          %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
+  %p
+    Total:
+    = @total_units
+    units

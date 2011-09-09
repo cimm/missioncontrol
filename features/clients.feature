@@ -3,6 +3,11 @@ Feature: Know my clients
   As a freelancer
   I can track the work per client
 
+  Scenario: open clients
+    Given I am on the homepage
+    When I go to the clients page
+    Then I am on the clients page
+
   Scenario: add a client
     When I add a client
     Then the client has been added

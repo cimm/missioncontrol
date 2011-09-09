@@ -1,8 +1,9 @@
-%h1 New unit
-
-= form_for @unit do |f|
-  = render :partial => "form", :object => f
-  .actions
-    = f.submit "Add unit", :class => "btn primary"
-    or
-    = link_to "cancel", units_path
+%section#new-unit
+  .page-header
+    %h1 New unit
+  = form_for @unit do |f|
+    = render :partial => "form", :object => f
+    .actions
+      = f.submit "Add unit", :class => "btn primary"
+      or
+      = link_to "cancel", units_path
