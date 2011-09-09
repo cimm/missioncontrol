@@ -6,3 +6,7 @@
   = form.label :client_id
   .input
     = form.select :client_id, @clients.collect {|c| [c.nickname, c.id]}
+.clearfix
+  = form.label :default_rate
+  .input
+    = form.text_field :default_rate

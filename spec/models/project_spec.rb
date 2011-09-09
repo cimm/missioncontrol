@@ -33,6 +33,21 @@ describe Project do
     project.should_not be_valid
   end
 
+  it "has a default rate" do
+    project.should respond_to :default_rate
+    project.should respond_to :default_rate=
+  end
+
+  it "is valid with a decimal default rate" do
+    project.default_rate = 400.50
+    project.should be_valid
+  end
+
+  it "isn't valid with a negative default rate" do
+    project.default_rate = -500
+    project.should_not be_valid
+  end
+
   describe "client_nickname" do
     let(:client)   { mock("Client") }
     let(:nickname) { mock("Nickname") }

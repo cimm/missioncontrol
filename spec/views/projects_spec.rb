@@ -1,14 +1,15 @@
 require "spec_helper"
 
 describe "projects/index" do
-  let(:project)  { mock_model(Project) }
-  let(:projects) { [project] }
-  let(:name)     { "Project Stradivarius" }
-  let(:client)   { mock_model(Client) }
-  let(:nickname) { "Acme" }
+  let(:project)      { mock_model(Project) }
+  let(:projects)     { [project] }
+  let(:name)         { "Project Stradivarius" }
+  let(:client)       { mock_model(Client) }
+  let(:nickname)     { "Acme" }
+  let(:default_rate) { 400 }
 
   before :each do
-    project.stub(:name => name, :client_nickname => nickname)
+    project.stub(:name => name, :client_nickname => nickname, :default_rate => default_rate)
     client.stub(:nickname => nickname)
     assign :projects, projects
   end
@@ -33,6 +34,11 @@ describe "projects/index" do
     rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
   end
 
+  it "shows the default rates" do
+    render
+    rendered.should have_tag("td", :with => {:class => "default_rate"}, :text => /#{default_rate}/i)
+  end
+
   it "shows an edit link for the projects" do
     render
     projects.each do |p|
@@ -43,13 +49,14 @@ describe "projects/index" do
 end
 
 describe "projects/new" do
-  let(:project)  { mock_model(Project) }
-  let(:client)   { mock_model(Client)}
-  let(:clients)  { [client] }
-  let(:nickname) { "Acme" }
+  let(:project)      { mock_model(Project) }
+  let(:client)       { mock_model(Client)}
+  let(:clients)      { [client] }
+  let(:nickname)     { "Acme" }
+  let(:default_rate) { 400 }
 
   before :each do
-    project.stub(:name => nil, :client_id => client)
+    project.stub(:name => nil, :client_id => client, :default_rate => default_rate)
     client.stub(:nickname => nickname)
     assign :project, project
     assign :client,  client
@@ -83,6 +90,16 @@ describe "projects/new" do
     end
   end
 
+  it "has a label for the default rate field" do
+    render
+    rendered.should have_content("Default rate")
+  end
+
+  it "has a default rate field" do
+    render
+    rendered.should have_selector("#project_default_rate")
+  end
+
   it "has a submit button" do
     render
     rendered.should have_button("Add project")
@@ -95,13 +112,14 @@ describe "projects/new" do
 end
 
 describe "projects/edit" do
-  let(:project)  { mock_model(Project) }
-  let(:client)   { mock_model(Client)}
-  let(:clients)  { [client] }
-  let(:nickname) { "Acme" }
+  let(:project)      { mock_model(Project) }
+  let(:client)       { mock_model(Client)}
+  let(:clients)      { [client] }
+  let(:nickname)     { "Acme" }
+  let(:default_rate) { 400 }
 
   before :each do
-    project.stub(:name => nil, :client_id => nil)
+    project.stub(:name => nil, :client_id => nil, :default_rate => default_rate)
     client.stub(:nickname => nickname)
     assign :project, project
     assign :clients, clients
@@ -117,9 +135,19 @@ describe "projects/edit" do
     rendered.should have_content("Name")
   end
 
-  it "has a name text field for the project" do
+  it "has a name text field" do
     render
     rendered.should have_selector("#project_name")
+  end
+
+  it "has a label for the default rate field" do
+    render
+    rendered.should have_content("Default rate")
+  end
+
+  it "has a default rate field" do
+    render
+    rendered.should have_selector("#project_default_rate")
   end
 
   it "has a submit button to update the project" do

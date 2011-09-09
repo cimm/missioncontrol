@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(:version => 20110902062806) do
   add_index "clients", ["nickname"], :name => "index_clients_on_nickname"
 
   create_table "projects", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "client_id",  :null => false
+    t.string   "name",         :null => false
+    t.integer  "client_id",    :null => false
+    t.integer  "default_rate"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

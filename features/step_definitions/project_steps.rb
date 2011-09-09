@@ -5,7 +5,8 @@ end
 When /^I add a project$/ do
   visit projects_path
   click_link "New"
-  fill_in "Name", :with => "Projectr"
+  fill_in "Name",         :with => "Stradivarius"
+  fill_in "Default rate", :with => "400"
   click_button "Add project"
 end
 
@@ -19,6 +20,7 @@ When /^I update the project$/ do
   click_link "edit"
   fill_in "Name",              :with => "Project Amadeus"
   select @new_client.nickname, :from => "Client"
+  fill_in "Default rate",      :with => "450"
   click_button "Update"
 end
 
@@ -28,8 +30,9 @@ end
 
 Then /^the project has been updated$/ do
   @project.reload
-  @project.name.should   eql "Project Amadeus"
-  @project.client.should eql @new_client
+  @project.name.should         eql "Project Amadeus"
+  @project.default_rate.should eql 450
+  @project.client.should       eql @new_client
 end
 
 Then /^I see the list of projects$/ do
@@ -38,5 +41,8 @@ Then /^I see the list of projects$/ do
   end
   within ".nickname" do
     page.should have_content(@project.client_nickname)
+  end
+  within ".default_rate" do
+    page.should have_content(@project.default_rate)
   end
 end
