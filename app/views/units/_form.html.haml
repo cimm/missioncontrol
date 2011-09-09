@@ -9,4 +9,6 @@
 .clearfix
   = form.label :hours_spent
   .input
-    = form.text_field :hours_spent
+    .input-append
+      = form.text_field :hours_spent, :class => "small"
+      %span.add-on hours

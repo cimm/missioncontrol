@@ -9,4 +9,6 @@
 .clearfix
   = form.label :default_rate
   .input
-    = form.text_field :default_rate
+    .input-prepend
+      %span.add-on €
+      = form.text_field :default_rate, :class => "small"
