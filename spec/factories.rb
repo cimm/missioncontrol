@@ -5,7 +5,9 @@ Sham.executed_at  { |n| Date.today + n.days }
 Sham.nickname     { |n| "Acme #{n}" }
 
 Sham.name         { |n| "Project #{n}" }
-Sham.hours_spent  { |n| rand(24)+1 }
+Sham.hours_spent  { rand(24)+1 }
+
+Sham.setting      { |n| "preference_#{n}" }
 
 FactoryGirl.define do
   factory :unit do
@@ -21,5 +23,9 @@ FactoryGirl.define do
   factory :project do
     name
     client
+  end
+
+  factory :preference do
+    setting
   end
 end

@@ -11,13 +11,16 @@
       .fill
         .container
           %h3= link_to "Mission Control", root_path
-          %ul
+          %ul.nav
             %li{:class => active("units")}
               = link_to "Units", units_path
             %li{:class => active("projects")}
               = link_to "Projects", projects_path
             %li{:class => active("clients")}
               = link_to "Clients", clients_path
+          %ul.secondary-nav
+            %li{:class => active("preferences")}
+              = link_to "Preferences", preferences_path
     .container
       - flash.each do |name, msg|
         = content_tag :div, msg, :class => "alert-message #{name}"

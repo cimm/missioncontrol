@@ -1,0 +1,15 @@
+%section#preferences
+  .page-header
+    %h1 Preferences
+  %table.zebra-striped
+    %thead
+      %tr
+        %th Setting
+        %th Value
+        %th
+    %tbody
+      - @preferences.each do |preference|
+        %tr
+          %td.setting= preference.setting.humanize
+          %td.value= preference.value
+          %td= link_to "edit", edit_preference_path(preference), :id => "edit_preference_#{preference.id}", :class => "btn small"

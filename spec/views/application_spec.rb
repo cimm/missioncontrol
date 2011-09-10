@@ -25,6 +25,11 @@ describe "layouts/application" do
     rendered.should have_tag("a", :with => {:href => clients_path}, :text => /Clients/)
   end
 
+  it "links to the preferences index page" do
+    render
+    rendered.should have_tag("a", :with => {:href => preferences_path}, :text => /Preferences/)
+  end
+
   it "has an active navigation item" do
     render
     rendered.should have_css(".active")
