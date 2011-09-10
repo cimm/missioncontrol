@@ -19,7 +19,7 @@ Then /^the preference has been updated$/ do
 end
 
 Then /^I see the list of preferences$/ do
-  within ".setting" do
+  within "th" do
     page.should have_content(@preference.setting.humanize)
   end
   within ".value" do

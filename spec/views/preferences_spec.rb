@@ -3,9 +3,9 @@ require "spec_helper"
 describe "preferences/index" do
   let(:preference)        { mock_model(Preference) }
   let(:preferences)       { [preference] }
-  let(:setting)           { "company_name" }
-  let(:humanized_setting) { "Company name" }
-  let(:value)             { "Acme Inc." }
+  let(:setting)           { "vat_number" }
+  let(:humanized_setting) { "Vat number" }
+  let(:value)             { "BE0437262043" }
 
   before :each do
     preference.stub(:setting => setting, :value => value)
@@ -33,7 +33,7 @@ describe "preferences/index" do
 
   it "shows the settings" do
     render
-    rendered.should have_tag("td", :with => {:class => "setting"}, :text => /#{humanized_setting}/i)
+    rendered.should have_tag("th", :text => /#{humanized_setting}/i)
   end
 
   it "gets the values from the preferences" do
@@ -56,8 +56,8 @@ end
 
 describe "preferences/edit" do
   let(:preference)        { mock_model(Preference) }
-  let(:setting)           { "company_name" }
-  let(:humanized_setting) { "Company name" }
+  let(:setting)           { "vat_number" }
+  let(:humanized_setting) { "Vat number" }
 
   before :each do
     preference.stub(:setting => setting, :value => nil)

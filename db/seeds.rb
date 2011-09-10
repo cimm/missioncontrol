@@ -1,1 +1,3 @@
-Preference.create!(:setting => "company_name")
+%w{name street postcode city country vat_number}.each do |setting|
+  Preference.create!(:setting => setting)
+end
