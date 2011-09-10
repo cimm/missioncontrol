@@ -28,9 +28,23 @@ describe "units/index" do
     rendered.should have_link("New")
   end
 
+  it "gets the executed date from the units" do
+    units.each do |u|
+      u.should_receive(:executed_at)
+    end
+    render
+  end
+
   it "shows the date the units were executed" do
     render
     rendered.should have_tag("td", :with => {:class => "executed_at"}, :text => /#{executed_at}/i)
+  end
+
+  it "gets the projects' names from the units" do
+    units.each do |u|
+      u.should_receive(:project_name)
+    end
+    render
   end
 
   it "shows the project names for the units" do

@@ -24,14 +24,35 @@ describe "projects/index" do
     rendered.should have_link("New")
   end
 
+  it "gets the names from the projects" do
+    projects.each do |p|
+      p.should_receive(:name)
+    end
+    render
+  end
+
   it "shows the projects names" do
     render
     rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
   end
 
+  it "gets the clients' nicknames from the projects" do
+    projects.each do |p|
+      p.should_receive(:client_nickname)
+    end
+    render
+  end
+
   it "shows the client nicknames" do
     render
     rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
+  end
+
+  it "gets the default rates from the projects" do
+    projects.each do |p|
+      p.should_receive(:default_rate)
+    end
+    render
   end
 
   it "shows the default rates" do

@@ -21,9 +21,23 @@ describe "clients/index" do
     rendered.should have_link("New")
   end
 
+  it "gets the nicknames of the clients" do
+    clients.each do |c|
+      c.should_receive(:nickname)
+    end
+    render
+  end
+
   it "shows the nicknames of the clients" do
     render
     rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
+  end
+
+  it "gets the names of the clients" do
+    clients.each do |c|
+      c.should_receive(:name)
+    end
+    render
   end
 
   it "shows the names of the clients" do
