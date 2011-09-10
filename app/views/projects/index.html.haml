@@ -7,11 +7,14 @@
       %tr
         %th Name
         %th Client
+        %th Default rate
         %th
     %tbody
       - @projects.each do |project|
         %tr
           %td.name= project.name
           %td.nickname= project.client_nickname
-          %td.default_rate= project.default_rate
+          %td.default_rate
+            €
+            = project.default_rate
           %td= link_to "edit", edit_project_path(project), :id => "edit_project_#{project.id}", :class => "btn small"
