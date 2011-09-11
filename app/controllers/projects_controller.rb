@@ -4,8 +4,9 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
-    @clients = Client.all
+    @project           = Project.new
+    @clients           = Client.all
+    flash.now[:notice] = "Create a client first" if @clients.empty?
   end
 
   def create

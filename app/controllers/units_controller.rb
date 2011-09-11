@@ -6,8 +6,9 @@ class UnitsController < ApplicationController
   end
 
   def new
-    @unit     = Unit.new
-    @projects = Project.all
+    @unit              = Unit.new
+    @projects          = Project.all
+    flash.now[:notice] = "Create a project first" if @projects.empty?
   end
 
   def create

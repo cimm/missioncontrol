@@ -82,6 +82,24 @@ describe UnitsController do
       assigns(:projects).should eql projects
     end
 
+    context "when there are projects" do
+      it "does not assign a flash message" do
+        get :new
+        flash[:notice].should be_nil
+      end
+    end
+
+    context "when there are no projects" do
+      before :each do
+        Project.stub(:all => [])
+      end
+
+      it "assigns a flash message" do
+        get :new
+        flash[:notice].should_not be_nil
+      end
+    end
+
     it "renders the new unit page" do
       get :new
       response.should render_template(:new)

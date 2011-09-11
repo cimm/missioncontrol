@@ -58,6 +58,24 @@ describe ProjectsController do
       assigns(:clients).should eql clients
     end
 
+    context "when there are clients" do
+      it "does not assign a flash message" do
+        get :new
+        flash[:notice].should be_nil
+      end
+    end
+
+    context "when there are no clients" do
+      before :each do
+        Client.stub(:all => [])
+      end
+
+      it "assigns a flash message" do
+        get :new
+        flash[:notice].should_not be_nil
+      end
+    end
+
     it "renders the new project page" do
       get :new
       response.should render_template(:new)
