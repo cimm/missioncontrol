@@ -18,16 +18,16 @@ Installing
 
 Make sure you have Ruby 1.9.2 and Bundler installed and clone this repository.
 
-  $ cp config/database.yml.example config/database.yml
-  $ bundle install
-  $ rake db:create; rake db:schema:load
-  $ rails server
+    $ cp config/database.yml.example config/database.yml
+    $ bundle install
+    $ rake db:create; rake db:schema:load
+    $ rails server
 
 Optionally you can run the tests:
 
-  $ RAILS_ENV=test rake db:schema:load
-  $ cucumber
-  $ rspec spec
+    $ RAILS_ENV=test rake db:schema:load
+    $ cucumber
+    $ rspec spec
 
 Thanks
 ------
