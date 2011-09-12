@@ -13,7 +13,6 @@ Feature: Set my personal preferences
     When I list the preferences
     Then I see the list of preferences
 
-  @wip
   Scenario: update a preference
     Given I have a preference
     When I update the preference

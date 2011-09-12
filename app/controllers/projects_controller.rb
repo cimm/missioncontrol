@@ -10,13 +10,13 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
-    if @project.save
-      redirect_to projects_path, :notice => "Project added"
+    project = Project.new(params[:project])
+    if project.save
+      flash[:notice] = "Project added"
     else
       flash[:error] = "Project not added"
-      render :new
     end
+    redirect_to(:action => "index")
   end
 
   def edit

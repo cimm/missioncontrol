@@ -94,11 +94,6 @@ describe ProjectsController do
       post :create, :project => params
     end
 
-    it "assigns the project" do
-      post :create, :project => params
-      assigns(:project).should eql project
-    end
-
     it "tries to persist the project" do
       project.should_receive(:save)
       post :create, :project => params
@@ -113,11 +108,6 @@ describe ProjectsController do
         post :create, :project => params
         flash[:notice].should_not be_nil
       end
-
-      it "redirects to the projects index page" do
-        post :create, :project => params
-        response.should redirect_to(:action => "index")
-      end
     end
 
     context "is not valid" do
@@ -125,16 +115,15 @@ describe ProjectsController do
         project.stub(:save => false)
       end
 
-      it "assigns a non-sticky error flash message" do
+      it "assigns an error flash message" do
         post :create, :project => params
-        flash.now[:error].should_not be_nil
-        # TODO Isn't testing the "stickyness" at the moment
+        flash[:error].should_not be_nil
       end
+    end
 
-      it "renders the new page" do
-        post :create, :project => params
-        response.should render_template(:new)
-      end
+    it "redirects to the projects index page" do
+      post :create, :project => params
+      response.should redirect_to(:action => "index")
     end
   end
 

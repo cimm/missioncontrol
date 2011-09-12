@@ -37,14 +37,6 @@ When /^I update the client$/ do
   click_button "Update"
 end
 
-Then /^the client has been added$/ do
-  Client.count.should eql 1
-end
-
-Then /^the client has not been added$/ do
-  Client.count.should eql 0
-end
-
 Then /^the client has been updated$/ do
   @client.reload
   @client.nickname.should    eql "Prime"

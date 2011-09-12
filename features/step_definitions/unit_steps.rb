@@ -11,6 +11,12 @@ When /^I add a unit$/ do
   click_button "Add unit"
 end
 
+When /^I try to add a unit with missing details$/ do
+  visit units_path
+  click_link "New"
+  click_button "Add unit"
+end
+
 When /^I list the units$/ do
   visit units_path
 end
@@ -27,10 +33,6 @@ When /^I update the unit$/ do
   select @new_project.name,        :from => "Project"
   fill_in "unit_hours_spent",      :with => @hours_spent
   click_button "Update"
-end
-
-Then /^the unit has been added$/ do
-  Unit.count.should eql 1
 end
 
 Then /^the unit has been updated$/ do

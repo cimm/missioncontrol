@@ -13,6 +13,10 @@ Feature: Track units spent
     When I add a unit
     Then the unit has been added
 
+  Scenario: fail to add a unit
+    When I try to add a unit with missing details
+    Then the unit has not been added
+
   Scenario: list the units
     Given I have a unit
     When I list the units

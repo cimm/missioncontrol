@@ -10,6 +10,12 @@ When /^I add a project$/ do
   click_button "Add project"
 end
 
+When /^I try to add a project with missing details$/ do
+  visit projects_path
+  click_link "New"
+  click_button "Add project"
+end
+
 When /^I list the projects$/ do
   visit projects_path
 end
@@ -22,10 +28,6 @@ When /^I update the project$/ do
   select @new_client.nickname, :from => "Client"
   fill_in "Default rate",      :with => "450"
   click_button "Update"
-end
-
-Then /^the project has been added$/ do
-  Project.count.should eql 1
 end
 
 Then /^the project has been updated$/ do

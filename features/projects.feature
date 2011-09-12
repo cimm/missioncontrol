@@ -13,6 +13,10 @@ Feature: Group per project
     When I add a project
     Then the project has been added
 
+  Scenario: fail to add a project
+    When I try to add a project with missing details
+    Then the project has not been added
+
   Scenario: list the projects
     Given I have a project
     When I list the projects
