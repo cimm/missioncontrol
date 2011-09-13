@@ -8,18 +8,18 @@ describe UnitsController do
   end
 
   describe "index" do
-    let(:units)       { mock("All units") }
+    let(:units)       { mock("All units ordered") }
     let(:projects)    { [mock("Project")] }
     let(:total_units) { mock("Total number of units")}
 
     before :each do
-      Unit.stub(:all => units)
+      Unit.stub(:order => units)
       units.stub(:count => total_units)
       Project.stub(:all => projects)
     end
 
-    it "gets all the units" do
-      Unit.should_receive(:all)
+    it "gets all the units chronologically ordered" do
+      Unit.should_receive(:order).with("executed_at ASC")
       get :index
     end
 
