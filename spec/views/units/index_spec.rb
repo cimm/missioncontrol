@@ -8,14 +8,12 @@ describe "units/index" do
   let(:hours_spent)           { 8 }
   let(:formatted_hours_spent) { "8 hours" }
   let(:executed_at)           { Date.today }
-  let(:total_units)           { mock("Total number of units") }
 
   before :each do
     unit.stub(:executed_at => executed_at, :project_name => name, :hours_spent => hours_spent)
     project.stub(:name => name)
     view.stub(:formatted_hours => formatted_hours_spent)
-    assign :units,       units
-    assign :total_units, total_units
+    assign :units, units
   end
 
   it "has a title" do
@@ -74,10 +72,5 @@ describe "units/index" do
   it "shows an edit link for the units" do
     render
     rendered.should have_selector("a#edit_unit_#{unit.id}")
-  end
-
-  it "shows the total units" do
-    render
-    rendered.should have_content("Total: #{total_units} units")
   end
 end

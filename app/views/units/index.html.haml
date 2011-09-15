@@ -16,7 +16,3 @@
           %td.name= unit.project_name
           %td.hours_spent= formatted_hours(unit.hours_spent)
           %td= link_to "edit", edit_unit_path(unit), :id => "edit_unit_#{unit.id}", :class => "btn small"
-  %p
-    Total:
-    = @total_units
-    units

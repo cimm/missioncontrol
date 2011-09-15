@@ -1,8 +1,7 @@
 class UnitsController < ApplicationController
   def index
-    @units       = Unit.order("executed_at ASC")
-    @projects    = Project.all
-    @total_units = @units.count
+    @units    = Unit.order("executed_at ASC")
+    @projects = Project.all
   end
 
   def new

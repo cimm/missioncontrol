@@ -10,11 +10,9 @@ describe UnitsController do
   describe "index" do
     let(:units)       { mock("All units ordered") }
     let(:projects)    { [mock("Project")] }
-    let(:total_units) { mock("Total number of units")}
 
     before :each do
       Unit.stub(:order => units)
-      units.stub(:count => total_units)
       Project.stub(:all => projects)
     end
 
@@ -36,16 +34,6 @@ describe UnitsController do
     it "assigns all the projects" do
       get :index
       assigns(:projects).should eql projects
-    end
-
-    it "gets the total number of units" do
-      units.should_receive(:count)
-      get :index
-    end
-
-    it "assgins the total number of units" do
-      get :index
-      assigns(:total_units).should eql total_units
     end
 
     it "renders the units page" do
