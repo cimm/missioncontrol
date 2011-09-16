@@ -14,6 +14,11 @@ describe "units/edit" do
     rendered.should have_content("Edit unit")
   end
 
+  it "has an edit form" do
+    render
+    rendered.should have_form(unit_path(unit), "post")
+  end
+
   it "renders the form partial" do
     render
     view.should render_template(:partial => "_form", :object => form)

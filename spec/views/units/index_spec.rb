@@ -35,7 +35,7 @@ describe "units/index" do
 
   it "shows the date the units were executed" do
     render
-    rendered.should have_tag("td", :with => {:class => "executed_at"}, :text => /#{executed_at}/i)
+    rendered.should have_tag(".executed_at", :text => executed_at.to_s)
   end
 
   it "gets the project names for the units" do
@@ -47,7 +47,7 @@ describe "units/index" do
 
   it "shows the project names for the units" do
     render
-    rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
+    rendered.should have_tag(".name", :text => name)
   end
 
   it "gets the hours spent for the units" do
@@ -66,7 +66,7 @@ describe "units/index" do
 
   it "shows the formatted hours spent for the units" do
     render
-    rendered.should have_tag("td", :with => {:class => "hours_spent"}, :text => /#{formatted_hours_spent}/i)
+    rendered.should have_tag(".hours_spent", :text => formatted_hours_spent)
   end
 
   it "shows an edit link for the units" do

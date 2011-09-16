@@ -14,6 +14,11 @@ describe "clients/new" do
     rendered.should have_content("New client")
   end
 
+  it "has a new form" do
+    render
+    rendered.should have_form(client_path(client), "post")
+  end
+
   it "renders the form partial" do
     render
     view.should render_template(:partial => "_form", :object => form)

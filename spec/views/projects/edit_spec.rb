@@ -14,6 +14,11 @@ describe "projects/edit" do
     rendered.should have_content("Edit project")
   end
 
+  it "has an edit form" do
+    render
+    rendered.should have_form(project_path(project), "post")
+  end
+
   it "renders the form partial" do
     render
     view.should render_template(:partial => "_form", :object => form)

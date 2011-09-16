@@ -14,6 +14,11 @@ describe "preferences/edit" do
     rendered.should have_content("Edit preference")
   end
 
+  it "has an edit form" do
+    render
+    rendered.should have_form(preference_path(preference), "post")
+  end
+
   it "renders the form partial" do
     render
     view.should render_template(:partial => "_form", :object => form)

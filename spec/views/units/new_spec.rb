@@ -14,6 +14,11 @@ describe "units/new" do
     rendered.should have_content("New unit")
   end
 
+  it "has a new form" do
+    render
+    rendered.should have_form(unit_path(unit), "post")
+  end
+
   it "renders the form partial" do
     render
     view.should render_template(:partial => "_form", :object => form)

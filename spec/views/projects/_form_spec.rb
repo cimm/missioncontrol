@@ -32,8 +32,8 @@ describe "projects/_form" do
 
   it "has a client select field" do
     partial_render
-    rendered.should have_tag("select", :with => {:id => "project_client_id"}) do
-      with_tag "option", :with => {:value => client.id}, :text => /#{nickname}/i
+    rendered.should have_tag("select#project_client_id") do
+      with_option nickname, :value => client.id
     end
   end
 

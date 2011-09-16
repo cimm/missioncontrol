@@ -33,7 +33,7 @@ describe "preferences/index" do
 
   it "shows the settings" do
     render
-    rendered.should have_tag("th", :text => /#{humanized_setting}/i)
+    rendered.should have_tag("th", :text => humanized_setting)
   end
 
   it "gets the values from the preferences" do
@@ -45,7 +45,7 @@ describe "preferences/index" do
 
   it "shows the values" do
     render
-    rendered.should have_tag("td", :with => {:class => "value"}, :text => /#{value}/i)
+    rendered.should have_tag(".value", :text => value)
   end
 
   it "shows an edit link for the preferences" do

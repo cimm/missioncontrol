@@ -14,6 +14,11 @@ describe "projects/new" do
     rendered.should have_content("New project")
   end
 
+  it "has a new form" do
+    render
+    rendered.should have_form(project_path(project), "post")
+  end
+
   it "renders the form partial" do
     render
     view.should render_template(:partial => "_form", :object => form)

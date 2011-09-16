@@ -30,7 +30,7 @@ describe "clients/index" do
 
   it "shows the nicknames of the clients" do
     render
-    rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
+    rendered.should have_tag(".nickname", :text => nickname)
   end
 
   it "gets the names of the clients" do
@@ -42,7 +42,7 @@ describe "clients/index" do
 
   it "shows the names of the clients" do
     render
-    rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
+    rendered.should have_tag(".name", :text => name)
   end
 
   it "shows an edit link for the clients" do

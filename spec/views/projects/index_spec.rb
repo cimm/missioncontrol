@@ -34,7 +34,7 @@ describe "projects/index" do
 
   it "shows the projects names" do
     render
-    rendered.should have_tag("td", :with => {:class => "name"}, :text => /#{name}/i)
+    rendered.should have_tag(".name", :text => name)
   end
 
   it "gets the clients' nicknames from the projects" do
@@ -46,7 +46,7 @@ describe "projects/index" do
 
   it "shows the client nicknames" do
     render
-    rendered.should have_tag("td", :with => {:class => "nickname"}, :text => /#{nickname}/i)
+    rendered.should have_tag(".nickname", :text => nickname)
   end
 
   it "gets the default rates from the projects" do
@@ -59,7 +59,7 @@ describe "projects/index" do
   context "has a default rate" do
     it "shows the default rates" do
       render
-      rendered.should have_tag("td", :with => {:class => "default_rate"}, :text => /€\s#{default_rate}/)
+      rendered.should have_tag(".default_rate", :text => /€\s#{default_rate}/)
     end
   end
 
@@ -70,7 +70,7 @@ describe "projects/index" do
 
     it "shows the default rates" do
       render
-      rendered.should have_tag("td", :with => {:class => "default_rate"}, :text => /\s/)
+      rendered.should have_tag(".default_rate", :text => /\s/)
     end
   end
 
