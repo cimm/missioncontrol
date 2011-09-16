@@ -15,6 +15,7 @@
           %td.name= project.name
           %td.nickname= project.client_nickname
           %td.default_rate
-            €
-            = project.default_rate
+            - if project.default_rate
+              €
+              = project.default_rate
           %td= link_to "edit", edit_project_path(project), :id => "edit_project_#{project.id}", :class => "btn small"

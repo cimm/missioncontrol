@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "spec_helper"
 
 describe "projects/index" do
@@ -55,9 +56,22 @@ describe "projects/index" do
     render
   end
 
-  it "shows the default rates" do
-    render
-    rendered.should have_tag("td", :with => {:class => "default_rate"}, :text => /#{default_rate}/i)
+  context "has a default rate" do
+    it "shows the default rates" do
+      render
+      rendered.should have_tag("td", :with => {:class => "default_rate"}, :text => /€\s#{default_rate}/)
+    end
+  end
+
+  context "has no default rate" do
+    before :each do
+      project.stub(:default_rate => nil)
+    end
+
+    it "shows the default rates" do
+      render
+      rendered.should have_tag("td", :with => {:class => "default_rate"}, :text => /\s/)
+    end
   end
 
   it "shows an edit link for the projects" do
