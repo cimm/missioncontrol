@@ -6,6 +6,8 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'dotiw'
 
+gem 'therubyracer'
+
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
