@@ -50,7 +50,7 @@ describe UnitsController do
       Project.stub(:all => projects)
     end
 
-    it "creates a new unit" do
+    it "builds a new unit" do
       Unit.should_receive(:new)
       get :new
     end

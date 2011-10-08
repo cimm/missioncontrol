@@ -1,0 +1,28 @@
+.clearfix
+  = form.label :number
+  .input
+    .input-prepend
+      %span.add-on #
+      = form.text_field :number, :class => "small"
+.clearfix
+  = form.label :owed_at
+  .input
+    = form.date_select :owed_at
+.clearfix
+  = form.label :payed_at
+  .input
+    = form.date_select :payed_at, :include_blank => true
+.clearfix
+  = form.label :units
+  .input
+    %ul.inputs-list
+      - @selectable_units.each do |unit|
+        %li
+          = hidden_field_tag "invoice[unit_ids][]", nil, :id => nil
+          %label
+            = check_box_tag "invoice[unit_ids][]", unit.id, @invoice.has_invoiced_unit?(unit), :id => "invoice_unit_ids_#{unit.id}"
+            %span
+              = unit.executed_at
+              for
+              = unit.hours_spent
+              hours

@@ -1,7 +1,6 @@
 %section#projects
   .page-header
     %h1 Projects
-  = link_to "New", new_project_path, :accesskey => 'n', :class => "btn"
   %table.zebra-striped
     %thead
       %tr
@@ -19,3 +18,4 @@
               €
               = project.default_rate
           %td= link_to "edit", edit_project_path(project), :id => "edit_project_#{project.id}", :class => "btn small"
+  = link_to "New", new_project_path, :accesskey => 'n', :class => "btn"

@@ -9,6 +9,8 @@ Sham.hours_spent  { rand(24)+1 }
 
 Sham.setting      { |n| "preference_#{n}" }
 
+Sham.number       { |n| n+1 }
+
 FactoryGirl.define do
   factory :unit do
     executed_at
@@ -27,5 +29,9 @@ FactoryGirl.define do
 
   factory :preference do
     setting
+  end
+
+  factory :invoice do
+    number
   end
 end

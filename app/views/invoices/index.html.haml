@@ -1,0 +1,18 @@
+%section#invoices
+  .page-header
+    %h1 Invoices
+  %table.zebra-striped
+    %thead
+      %tr
+        %th Number
+        %th Owed at
+        %th Payed at
+        %th
+    %tbody
+      - @invoices.each do |invoice|
+        %tr
+          %td.number= invoice.number
+          %td.owed_at= invoice.owed_at
+          %td.payed_at= invoice.payed_at
+          %td= link_to "edit", edit_invoice_path(invoice), :id => "edit_invoice_#{invoice.id}", :class => "btn small"
+  = link_to "New", new_invoice_path, :accesskey => 'n', :class => "btn"

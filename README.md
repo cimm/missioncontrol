@@ -6,7 +6,7 @@ What?
 
 I'm a freelance web developer, I hate administrave tasks and a wise friend once told me, "Any given task I have to repeat 3 times is worth automating." Mission Control is my response to the problem, my own administrative robot so to say.
 
-In a perfect world it would tell me if I'm loosing money with a certain client, if my code quality drops, if I don't work enough, and soo many other metrics I worry over. Right now it keeps track of the days or hours I worked for my clients, tracking invoices will be next.
+In a perfect world it would tell me if I'm loosing money with a certain client, if my code quality drops, if I don't work enough, and soo many other metrics I worry over. Right now it keeps track of the days or hours I worked for my clients.
 
 Disclaimer
 ----------

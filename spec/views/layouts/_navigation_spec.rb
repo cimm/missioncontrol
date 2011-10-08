@@ -25,6 +25,11 @@ describe "layouts/_navigation" do
     rendered.should have_tag("a", :with => {:href => clients_path}, :text => "Clients")
   end
 
+  it "links to the invoices index page" do
+    render
+    rendered.should have_tag("a", :with => {:href => invoices_path}, :text => "Invoices")
+  end
+
   it "links to the preferences index page" do
     render
     rendered.should have_tag("a", :with => {:href => preferences_path}, :text => "Preferences")

@@ -129,8 +129,8 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
-    rspec2-rails-views-matchers (0.1.6)
-      nokogiri (~> 1.5.0)
+    rspec2-rails-views-matchers (0.2.0)
+      nokogiri (>= 1.4.4)
       rspec (>= 2.0.0)
     rubyzip (0.9.4)
     sass (3.1.7)
@@ -177,7 +177,7 @@ DEPENDENCIES
   jquery-rails
   rails (= 3.1.0)
   rspec-rails
-  rspec2-rails-views-matchers
+  rspec2-rails-views-matchers (= 0.2.0)
   sass-rails
   sqlite3
   therubyracer

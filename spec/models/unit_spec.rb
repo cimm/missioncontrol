@@ -53,6 +53,39 @@ describe Unit do
     unit.should_not be_valid
   end
 
+  it "belongs to an invoice" do
+    unit.should respond_to :invoice
+    unit.should respond_to :invoice=
+  end
+
+  context "self.not_invoiced" do
+    let(:invoiced_unit)      { mock("Invoiced unit") }
+    let(:units)              { [unit, invoiced_unit] }
+    let(:units_not_invoiced) { [unit] }
+
+    before :each do
+      Unit.stub(:all => units)
+      unit.stub(:invoiced? => false)
+      invoiced_unit.stub(:invoiced? => true)
+    end
+
+    it "gets the all the units" do
+      Unit.should_receive(:all)
+      Unit.not_invoiced
+    end
+
+    it "checks if the units are invoiced" do
+      units.each do |u|
+        u.should_receive(:invoiced?)
+      end
+      Unit.not_invoiced
+    end
+
+    it "returns the units that aren't invoiced yet" do
+      Unit.not_invoiced.should eql units_not_invoiced
+    end
+  end
+
   describe "project_name" do
     let(:project) { mock("Project") }
     let(:name)    { mock("Name") }
@@ -74,6 +107,33 @@ describe Unit do
 
     it "returns the project's name" do
       unit.project_name.should eql name
+    end
+  end
+
+  describe "invoiced?" do
+    it "gets the invoice" do
+      unit.should_receive(:invoice)
+      unit.invoiced?
+    end
+
+    context "it has an invoice" do
+      before :each do
+        unit.stub(:invoice => mock("Invoice"))
+      end
+
+      it "returns true" do
+        unit.should be_invoiced
+      end
+    end
+
+    context "it does not have an invoice" do
+      before :each do
+        unit.stub(:invoice => nil)
+      end
+
+      it "returns false" do
+        unit.should_not be_invoiced
+      end
     end
   end
 end
