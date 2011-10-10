@@ -13,6 +13,9 @@
         %tr
           %td.number= invoice.number
           %td.owed_at= invoice.owed_at
-          %td.payed_at= invoice.payed_at
+          %td.payed_at
+            = invoice.payed_at
+            - if invoice.overdue?
+              %span.label.important= "Overdue"
           %td= link_to "edit", edit_invoice_path(invoice), :id => "edit_invoice_#{invoice.id}", :class => "btn small"
   = link_to "New", new_invoice_path, :accesskey => 'n', :class => "btn"

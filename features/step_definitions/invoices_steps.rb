@@ -2,6 +2,11 @@ Given /^I have an invoice$/ do
   @invoice = FactoryGirl.create(:invoice)
 end
 
+Given /^I have an overdue invoice$/ do
+  yesterday = Date.today - 1.day
+  @invoice = FactoryGirl.create(:invoice, :owed_at => yesterday)
+end
+
 When /^I add an invoice$/ do
   visit invoices_path
   click_link "New"
@@ -48,5 +53,11 @@ end
 Then /^I see the list of invoices$/ do
   within ".number" do
     page.should have_content(@invoice.number)
+  end
+end
+
+Then /^I see the invoice is overdue$/ do
+  within ".payed_at" do
+    page.should have_content("Overdue")
   end
 end

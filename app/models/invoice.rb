@@ -15,4 +15,16 @@ class Invoice < ActiveRecord::Base
   def has_invoiced_unit?(unit)
     units.include?(unit)
   end
+
+  def overdue?
+    !payed? && has_passed_its_owed_date?
+  end
+
+  def has_passed_its_owed_date?
+    owed_at.present? && owed_at < Date.today
+  end
+
+  def payed?
+    payed_at.present?
+  end
 end

@@ -85,13 +85,15 @@ describe Invoice do
     let(:units)              { [mock("Unit")] }
     let(:units_not_invoiced) { [mock("Unit")] }
     let(:selectable_units)   { [mock("Unit"), mock("Unit")] }
+    let(:yesterday)          { Date.today - 1 }
+    let(:today)              { Date.today }
 
     before :each do
       invoice.stub(:units => units)
       Unit.stub(:not_invoiced => units_not_invoiced)
       units.stub(:+ => selectable_units)
-      selectable_units[0].stub(:executed_at => Date.today-1)
-      selectable_units[1].stub(:executed_at => Date.today)
+      selectable_units[0].stub(:executed_at => yesterday)
+      selectable_units[1].stub(:executed_at => today)
     end
 
     it "gets the units linked to the invoice" do
@@ -147,6 +149,129 @@ describe Invoice do
 
       it "returns false" do
         invoice.should_not have_invoiced_unit(unit)
+      end
+    end
+  end
+
+  describe "overdue?" do
+    let(:today) { Date.today }
+
+    before :each do
+      invoice.stub(:owed_at => today)
+    end
+
+    it "checks if the invoice has been payed" do
+      invoice.should_receive(:payed?)
+      invoice.overdue?
+    end
+
+    it "checks if the invoice owed date has passed" do
+      invoice.should_receive(:has_passed_its_owed_date?)
+      invoice.overdue?
+    end
+
+    context "has been payed" do
+      before :each do
+        invoice.stub(:payed? => true)
+      end
+
+      it "returns false" do
+        invoice.should_not be_overdue
+      end
+    end
+
+    context "did not pass the owed date" do
+      before :each do
+        invoice.stub(:payed? => false, :has_passed_its_owed_date? => false)
+      end
+
+      it "returns false" do
+        invoice.should_not be_overdue
+      end
+    end
+
+    context "did pass the owed date" do
+      before :each do
+        invoice.stub(:payed? => false, :has_passed_its_owed_date? => true)
+      end
+
+      it "returns true" do
+        invoice.should be_overdue
+      end
+    end
+  end
+
+  describe "has_passed_its_owed_date?" do
+    let(:yesterday) { Date.today - 1}
+    let(:today)     { Date.today }
+    let(:tomorrow)  { Date.today + 1 }
+
+    it "gets the date the invoice is owed at" do
+      invoice.should_receive(:owed_at)
+      invoice.has_passed_its_owed_date?
+    end
+
+    it "gets today's date" do
+      Date.should_receive(:today).and_return(today)
+      invoice.has_passed_its_owed_date?
+    end
+
+    context "has no owed date" do
+      before :each do
+        invoice.stub(:owed_at => nil)
+      end
+
+      it "returns false" do
+        invoice.should_not have_passed_its_owed_date
+      end
+    end
+
+    context "owed date passed" do
+      before :each do
+        invoice.stub(:owed_at => yesterday)
+      end
+
+      it "returns true" do
+        invoice.should have_passed_its_owed_date
+      end
+    end
+
+    context "owed date not passed" do
+      before :each do
+        invoice.stub(:owed_at => tomorrow)
+      end
+
+      it "returns false" do
+        invoice.should_not have_passed_its_owed_date
+      end
+    end
+  end
+
+  describe "payed?" do
+    let(:today) { Date.today }
+
+    it "gets the date the invoice was payed" do
+      invoice.should_receive(:payed_at)
+      invoice.payed?
+    end
+
+    context "has been payed" do
+      before :each do
+        invoice.stub(:payed_at => today)
+      end
+
+      it "returns true" do
+        invoice.should be_payed
+      end
+    end
+
+    context "has not been payed yet" do
+      before :each do
+        invoice.stub(:payed_at => nil)
+      end
+
+      it "returns false" do
+        invoice.should_not be_payed
       end
     end
   end

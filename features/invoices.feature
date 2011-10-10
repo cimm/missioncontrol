@@ -21,6 +21,11 @@ Feature: Get payed for my work
     When I list the invoices
     Then I see the list of invoices
 
+  Scenario: see which invoices are overdue
+    Given I have an overdue invoice
+    When I list the invoices
+    Then I see the invoice is overdue
+
   Scenario: update an invoice
     Given I have an invoice
     And I have a unit

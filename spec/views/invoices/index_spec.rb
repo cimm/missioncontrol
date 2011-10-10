@@ -6,9 +6,10 @@ describe "invoices/index" do
   let(:number)   { "2011005" }
   let(:owed_at)  { Date.today }
   let(:payed_at) { Date.today }
+  let(:overdue)  { [true, false].sample }
 
   before :each do
-    invoice.stub(:number => number, :owed_at => owed_at, :payed_at => payed_at)
+    invoice.stub(:number => number, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue)
     assign :invoices, invoices
   end
 
@@ -55,7 +56,23 @@ describe "invoices/index" do
 
   it "shows the date the invoices are payed" do
     render
-    rendered.should have_tag(".payed_at", :text => payed_at.to_s)
+    rendered.should have_tag(".payed_at", :text => /#{payed_at.to_s}/)
+  end
+
+  it "checks if the invoice is overdue" do
+    invoice.should_receive(:overdue?)
+    render
+  end
+
+  context "is overdue" do
+    before :each do
+      invoice.stub(:overdue? => true)
+    end
+
+    it "shows an ovedue label" do
+      render
+      rendered.should have_tag(".important", :text => "Overdue")
+    end
   end
 
   it "shows an edit link for the invoices" do
