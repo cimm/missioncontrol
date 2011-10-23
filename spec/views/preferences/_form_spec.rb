@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe "preferences/_form" do
   let(:preference)        { mock_model(Preference) }
-  let(:setting)           { "vat_number" }
-  let(:humanized_setting) { "Vat number" }
+  let(:setting)           { mock("Key for setting") }
+  let(:humanized_setting) { mock("Humanized key for setting") }
   let(:partial_render)    { render :partial => "preferences/form", :object => @form }
 
   before :each do

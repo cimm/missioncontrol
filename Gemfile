@@ -15,7 +15,7 @@ end
 
 group :test do
   gem 'rspec-rails',                 '~> 2.6.1'
-  gem 'rspec2-rails-views-matchers', '~> 0.2.0'
+  gem 'rspec2-rails-views-matchers', '~> 0.2.1'
   gem 'cucumber-rails',              '~> 1.1.1'
   gem 'database_cleaner',            '~> 0.6.7'
   gem 'factory_girl_rails',          '~> 1.2.0'

@@ -4,9 +4,9 @@ require "spec_helper"
 describe "projects/index" do
   let(:project)      { mock_model(Project) }
   let(:projects)     { [project] }
-  let(:name)         { "Project Stradivarius" }
+  let(:name)         { mock("Project name") }
   let(:client)       { mock_model(Client) }
-  let(:nickname)     { "Acme" }
+  let(:nickname)     { mock("Company nickname") }
   let(:default_rate) { 400 }
 
   before :each do

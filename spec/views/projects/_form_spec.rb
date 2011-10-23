@@ -4,8 +4,8 @@ describe "projects/_form" do
   let(:project)        { mock_model(Project) }
   let(:client)         { mock_model(Client)}
   let(:clients)        { [client] }
-  let(:nickname)       { "Acme" }
-  let(:default_rate)   { 400 }
+  let(:nickname)       { mock("Company nickname") }
+  let(:default_rate)   { mock("Default rate") }
   let(:partial_render) { render :partial => "projects/form", :object => @form }
 
   before :each do

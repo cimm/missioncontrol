@@ -3,12 +3,13 @@ require "spec_helper"
 describe "preferences/index" do
   let(:preference)        { mock_model(Preference) }
   let(:preferences)       { [preference] }
-  let(:setting)           { "vat_number" }
-  let(:humanized_setting) { "Vat number" }
-  let(:value)             { "BE0437262043" }
+  let(:setting)           { mock("Key for setting") }
+  let(:humanized_setting) { mock("Humanized key for setting") }
+  let(:value)             { mock("Value for setting") }
 
   before :each do
     preference.stub(:setting => setting, :value => value)
+    setting.stub(:humanize => humanized_setting)
     assign :preferences, preferences
   end
 

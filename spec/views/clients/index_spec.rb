@@ -3,8 +3,8 @@ require "spec_helper"
 describe "clients/index" do
   let(:client)   { mock_model(Client) }
   let(:clients)  { [client] }
-  let(:nickname) { "Acme" }
-  let(:name)     { "Acme Inc." }
+  let(:nickname) { mock("Company nickname") }
+  let(:name)     { mock("Company name") }
 
   before :each do
     client.stub(:nickname => nickname, :name => name)

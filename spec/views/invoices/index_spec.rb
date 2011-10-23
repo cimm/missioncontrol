@@ -3,9 +3,9 @@ require "spec_helper"
 describe "invoices/index" do
   let(:invoice)  { mock_model(Invoice) }
   let(:invoices) { [invoice] }
-  let(:number)   { "2011005" }
-  let(:owed_at)  { Date.today }
-  let(:payed_at) { Date.today }
+  let(:number)   { mock("Invoice number") }
+  let(:owed_at)  { mock("Owed at date") }
+  let(:payed_at) { Date.today } # no mock due to bug in view matcher
   let(:overdue)  { [true, false].sample }
 
   before :each do
@@ -44,7 +44,7 @@ describe "invoices/index" do
 
   it "shows the date the invoices are owed" do
     render
-    rendered.should have_tag(".owed_at", :text => owed_at.to_s)
+    rendered.should have_tag(".owed_at", :text => owed_at)
   end
 
   it "gets the date the invoices are payed" do
@@ -56,7 +56,7 @@ describe "invoices/index" do
 
   it "shows the date the invoices are payed" do
     render
-    rendered.should have_tag(".payed_at", :text => /#{payed_at.to_s}/)
+    rendered.should have_tag(".payed_at", :text => /#{payed_at}/) # regex needed due to bug in view matcher
   end
 
   it "checks if the invoice is overdue" do

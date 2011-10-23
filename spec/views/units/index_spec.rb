@@ -4,10 +4,10 @@ describe "units/index" do
   let(:unit)                  { mock_model(Unit) }
   let(:units)                 { [unit] }
   let(:project)               { mock_model(Project) }
-  let(:name)                  { "Project Stradivarius" }
-  let(:hours_spent)           { 8 }
-  let(:formatted_hours_spent) { "8 hours" }
-  let(:executed_at)           { Date.today }
+  let(:name)                  { mock("Project name") }
+  let(:hours_spent)           { mock("Hours spent") }
+  let(:formatted_hours_spent) { mock("Humanized hours spent") }
+  let(:executed_at)           { mock("Executed date") }
 
   before :each do
     unit.stub(:executed_at => executed_at, :project_name => name, :hours_spent => hours_spent)
@@ -35,7 +35,7 @@ describe "units/index" do
 
   it "shows the date the units were executed" do
     render
-    rendered.should have_tag(".executed_at", :text => executed_at.to_s)
+    rendered.should have_tag(".executed_at", :text => executed_at)
   end
 
   it "gets the project names for the units" do
