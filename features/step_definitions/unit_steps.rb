@@ -52,3 +52,9 @@ Then /^I see the list of units$/ do
     page.should have_content(formatted_hours_spent)
   end
 end
+
+Then /^I am warned yesterday's unit is missing$/ do
+  within ".notice" do
+    page.should have_content("No unit found for yesterday")
+  end
+end

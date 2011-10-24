@@ -12,7 +12,7 @@ describe UnitsController do
     let(:projects)    { [mock("Project")] }
 
     before :each do
-      Unit.stub(:order => units)
+      Unit.stub(:order => units, :has_units_for_yesterday? => true)
       Project.stub(:all => projects)
     end
 
@@ -29,6 +29,25 @@ describe UnitsController do
     it "gets all the projects" do
       Project.should_receive(:all)
       get :index
+    end
+
+    context "there is a unit for yesterday" do
+      it "does not assign a flash message" do
+        get :index
+        flash[:notice].should be_nil
+      end
+    end
+
+    context "there is no unit for yesterday" do
+      before :each do
+        Unit.stub(:has_units_for_yesterday? => false)
+      end
+
+      it "assigns a non-sticky error flash message" do
+        get :index
+        flash[:notice].should_not be_nil
+        # TODO Isn't testing the "stickyness" at the moment
+      end
     end
 
     it "assigns all the projects" do

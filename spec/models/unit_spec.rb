@@ -86,6 +86,36 @@ describe Unit do
     end
   end
 
+  describe "self.has_units_for_yesterday?" do
+    let(:units)     { [mock("Unit")] }
+    let(:yesterday) { Date.today - 1 }
+
+    before :each do
+      Unit.stub(:where => units)
+    end
+
+    it "finds all units with yesterdays date" do
+      Unit.should_receive(:where).with(:executed_at => yesterday)
+      Unit.has_units_for_yesterday?
+    end
+
+    context "at least one unit found" do
+      it "returns true" do
+        Unit.should have_units_for_yesterday
+      end
+    end
+
+    context "no units found" do
+      before :each do
+        Unit.stub(:where => [])
+      end
+
+      it "returns false" do
+        Unit.should_not have_units_for_yesterday
+      end
+    end
+  end
+
   describe "project_name" do
     let(:project) { mock("Project") }
     let(:name)    { mock("Name") }

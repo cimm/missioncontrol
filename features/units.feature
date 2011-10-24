@@ -26,3 +26,7 @@ Feature: Track units spent
     Given I have a unit
     When I update the unit
     Then the unit has been updated
+
+  Scenario: warning when yesterday's unit is missing
+    Given I am on the homepage
+    Then I am warned yesterday's unit is missing

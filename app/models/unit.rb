@@ -10,6 +10,12 @@ class Unit < ActiveRecord::Base
     Unit.all.reject{|u| u.invoiced?}
   end
 
+  def self.has_units_for_yesterday?
+    yesterday        = Date.today - 1
+    yesterdays_units = Unit.where(:executed_at => yesterday)
+    yesterdays_units.any? ? true : false
+  end
+
   def project_name
     project.name
   end

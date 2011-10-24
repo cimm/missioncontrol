@@ -2,6 +2,7 @@ class UnitsController < ApplicationController
   def index
     @units    = Unit.order("executed_at ASC")
     @projects = Project.all
+    flash.now[:notice] = "No unit found for yesterday" unless Unit.has_units_for_yesterday?
   end
 
   def new
