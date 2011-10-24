@@ -27,4 +27,12 @@ class Invoice < ActiveRecord::Base
   def payed?
     payed_at.present?
   end
+
+  def cost_per_unit
+    units.map(&:cost)
+  end
+
+  def total_amount_before_vat
+    cost_per_unit.sum
+  end
 end

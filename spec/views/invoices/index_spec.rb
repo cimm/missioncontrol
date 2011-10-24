@@ -1,15 +1,17 @@
+# encoding: UTF-8
 require "spec_helper"
 
 describe "invoices/index" do
-  let(:invoice)  { mock_model(Invoice) }
-  let(:invoices) { [invoice] }
-  let(:number)   { mock("Invoice number") }
-  let(:owed_at)  { mock("Owed at date") }
-  let(:payed_at) { Date.today } # no mock due to bug in view matcher
-  let(:overdue)  { [true, false].sample }
+  let(:invoice)                 { mock_model(Invoice) }
+  let(:invoices)                { [invoice] }
+  let(:number)                  { mock("Invoice number") }
+  let(:owed_at)                 { mock("Owed at date") }
+  let(:payed_at)                { Date.today } # no mock due to bug in view matcher
+  let(:overdue)                 { [true, false].sample }
+  let(:total_amount_before_vat) { rand(500)+1000 }
 
   before :each do
-    invoice.stub(:number => number, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue)
+    invoice.stub(:number => number, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue, :total_amount_before_vat => total_amount_before_vat)
     assign :invoices, invoices
   end
 
@@ -73,6 +75,18 @@ describe "invoices/index" do
       render
       rendered.should have_tag(".important", :text => "Overdue")
     end
+  end
+
+  it "gets the total amounts for the invoices" do
+    invoices.each do |i|
+      i.should_receive(:total_amount_before_vat).and_return(total_amount_before_vat)
+    end
+    render
+  end
+
+  it "shows the total amount for the invoices" do
+    render
+    rendered.should have_tag(".total_amount_before_vat", :text => /€\s#{total_amount_before_vat}/)
   end
 
   it "shows an edit link for the invoices" do

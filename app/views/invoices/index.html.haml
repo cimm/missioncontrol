@@ -7,6 +7,7 @@
         %th Number
         %th Owed at
         %th Payed at
+        %th Before VAT
         %th
     %tbody
       - @invoices.each do |invoice|
@@ -17,5 +18,8 @@
             = invoice.payed_at
             - if invoice.overdue?
               %span.label.important= "Overdue"
+          %td.total_amount_before_vat
+            €
+            = invoice.total_amount_before_vat
           %td= link_to "edit", edit_invoice_path(invoice), :id => "edit_invoice_#{invoice.id}", :class => "btn small"
   = link_to "New", new_invoice_path, :accesskey => 'n', :class => "btn"

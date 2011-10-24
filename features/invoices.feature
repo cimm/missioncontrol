@@ -17,7 +17,7 @@ Feature: Get payed for my work
     Then the invoice has not been added
 
   Scenario: list the invoices
-    Given I have an invoice
+    Given I have a payed invoice
     When I list the invoices
     Then I see the list of invoices
 

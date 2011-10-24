@@ -136,4 +136,40 @@ describe Unit do
       end
     end
   end
+
+  describe "cost" do
+    let(:project)      { mock("Project") }
+    let(:default_rate) { mock("Default rate") }
+
+    before :each do
+      unit.stub(:project => project)
+      project.stub(:default_rate => default_rate)
+    end
+
+    it "gets the linked project" do
+      unit.should_receive(:project)
+      unit.cost
+    end
+
+    it "gets the default project rate" do
+      project.should_receive(:default_rate)
+      unit.cost
+    end
+
+    context "linked project has a default rate" do
+      it "returns the unit cost" do
+        unit.cost.should eql default_rate
+      end
+    end
+
+    context "linked project does not have a default rate" do
+      before :each do
+        project.stub(:default_rate => nil)
+      end
+
+      it "returns 0" do
+        unit.cost.should eql 0
+      end
+    end
+  end
 end

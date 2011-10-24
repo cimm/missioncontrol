@@ -2,9 +2,12 @@ Given /^I have an invoice$/ do
   @invoice = FactoryGirl.create(:invoice)
 end
 
+Given /^I have a payed invoice$/ do
+  @invoice = FactoryGirl.create(:payed_invoice)
+end
+
 Given /^I have an overdue invoice$/ do
-  yesterday = Date.today - 1.day
-  @invoice = FactoryGirl.create(:invoice, :owed_at => yesterday)
+  @invoice = FactoryGirl.create(:overdue_invoice)
 end
 
 When /^I add an invoice$/ do
@@ -53,6 +56,15 @@ end
 Then /^I see the list of invoices$/ do
   within ".number" do
     page.should have_content(@invoice.number)
+  end
+  within ".owed_at" do
+    page.should have_content(@invoice.owed_at)
+  end
+  within ".payed_at" do
+    page.should have_content(@invoice.payed_at)
+  end
+  within ".total_amount_before_vat" do
+    page.should have_content(@invoice.total_amount_before_vat)
   end
 end
 

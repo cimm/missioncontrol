@@ -275,4 +275,51 @@ describe Invoice do
       end
     end
   end
+
+  describe "cost_per_unit" do
+    let(:units)       { [mock("Unit")] }
+    let(:cost)        { mock("Cost") }
+    let(:units_costs) { [cost] }
+
+    before :each do
+      invoice.stub(:units => units)
+      units.each do |u|
+        u.stub(:cost => cost)
+      end
+    end
+
+    it "gets all linked units" do
+      invoice.should_receive(:units)
+      invoice.cost_per_unit
+    end
+
+    it "gets the cost for the each unit" do
+      units.each do |u|
+        u.should_receive(:cost)
+      end
+      invoice.cost_per_unit
+    end
+
+    it "returns the a list of unit costs" do
+      invoice.cost_per_unit.should eql units_costs
+    end
+  end
+
+  describe "total_amount_before_vat" do
+    let(:cost_per_unit)    { [300, 200] }
+    let(:total_units_cost) { 500 }
+
+    before :each do
+      invoice.stub(:cost_per_unit => cost_per_unit)
+    end
+
+    it "gets the costs per unit" do
+      invoice.should_receive(:cost_per_unit)
+      invoice.total_amount_before_vat
+    end
+
+    it "returns the sum of all unit costs" do
+      invoice.total_amount_before_vat.should eql total_units_cost
+    end
+  end
 end

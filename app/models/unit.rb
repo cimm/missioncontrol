@@ -17,4 +17,8 @@ class Unit < ActiveRecord::Base
   def invoiced?
     invoice.present?
   end
+
+  def cost
+    project.default_rate || 0
+  end
 end
