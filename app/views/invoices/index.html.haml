@@ -5,6 +5,7 @@
     %thead
       %tr
         %th Number
+        %th Client
         %th Owed at
         %th Payed at
         %th Before VAT
@@ -13,6 +14,7 @@
       - @invoices.each do |invoice|
         %tr
           %td.number= invoice.number
+          %td.clients_nicknames= invoice.clients_nicknames.join(", ")
           %td.owed_at= invoice.owed_at
           %td.payed_at
             = invoice.payed_at

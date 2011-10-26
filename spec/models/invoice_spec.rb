@@ -34,6 +34,30 @@ describe Invoice do
     invoice.should respond_to :units=
   end
 
+  it "has many projects" do
+    invoice.should respond_to :projects
+    invoice.should respond_to :projects=
+  end
+
+  it "only returns unique projects" do
+    project       = FactoryGirl.build(:project)
+    invoice.units = [FactoryGirl.build(:unit, :project => project), FactoryGirl.build(:unit, :project => project)]
+    invoice.save!
+    invoice.projects.count.should be 1
+  end
+
+  it "has many clients" do
+    invoice.should respond_to :clients
+    invoice.should respond_to :clients=
+  end
+
+  it "only returns unique clients" do
+    project       = FactoryGirl.build(:project)
+    invoice.units = [FactoryGirl.build(:unit, :project => project), FactoryGirl.build(:unit, :project => project)]
+    invoice.save!
+    invoice.clients.count.should be 1
+  end
+
   it "has a payed at date" do
     invoice.should respond_to :payed_at
     invoice.should respond_to :payed_at=
@@ -320,6 +344,34 @@ describe Invoice do
 
     it "returns the sum of all unit costs" do
       invoice.total_amount_before_vat.should eql total_units_cost
+    end
+  end
+
+  describe "clients_nicknames" do
+    let(:client)            { mock("Client") }
+    let(:clients)           { [client] }
+    let(:nickname)          { mock("Nickname") }
+    let(:clients_nicknames) { [nickname] }
+
+    before :each do
+      invoice.stub(:clients => clients)
+      client.stub(:nickname => nickname)
+    end
+
+    it "gets the clients" do
+      invoice.should_receive(:clients)
+      invoice.clients_nicknames
+    end
+
+    it "gets the nicknames of the clients" do
+      clients.each do |c|
+        c.should_receive(:nickname)
+      end
+      invoice.clients_nicknames
+    end
+
+    it "returns the nicknames of the clients" do
+      invoice.clients_nicknames.should eql clients_nicknames
     end
   end
 end

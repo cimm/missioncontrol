@@ -57,6 +57,9 @@ Then /^I see the list of invoices$/ do
   within ".number" do
     page.should have_content(@invoice.number)
   end
+  within ".clients_nicknames" do
+    page.should have_content(@invoice.clients_nicknames.join(", "))
+  end
   within ".owed_at" do
     page.should have_content(@invoice.owed_at)
   end

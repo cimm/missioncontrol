@@ -1,5 +1,7 @@
 class Invoice < ActiveRecord::Base
   has_many :units
+  has_many :projects, :through => :units ,   :uniq => true
+  has_many :clients,  :through => :projects, :uniq => true
 
   validates :number, :presence => true, :uniqueness => true
 
@@ -34,5 +36,9 @@ class Invoice < ActiveRecord::Base
 
   def total_amount_before_vat
     cost_per_unit.sum
+  end
+
+  def clients_nicknames
+    clients.map(&:nickname)
   end
 end

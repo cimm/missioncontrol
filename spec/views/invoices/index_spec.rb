@@ -2,16 +2,19 @@
 require "spec_helper"
 
 describe "invoices/index" do
-  let(:invoice)                 { mock_model(Invoice) }
-  let(:invoices)                { [invoice] }
-  let(:number)                  { mock("Invoice number") }
-  let(:owed_at)                 { mock("Owed at date") }
-  let(:payed_at)                { Date.today } # no mock due to bug in view matcher
-  let(:overdue)                 { [true, false].sample }
-  let(:total_amount_before_vat) { rand(500)+1000 }
+  let(:invoice)                       { mock_model(Invoice) }
+  let(:invoices)                      { [invoice] }
+  let(:number)                        { mock("Invoice number") }
+  let(:clients_nicknames)             { [mock("Client nicknames")] }
+  let(:stringified_clients_nicknames) { mock("Stringified clients nicknames") }
+  let(:owed_at)                       { mock("Owed at date") }
+  let(:payed_at)                      { Date.today } # no mock due to bug in view matcher
+  let(:overdue)                       { [true, false].sample }
+  let(:total_amount_before_vat)       { rand(500)+1000 }
 
   before :each do
-    invoice.stub(:number => number, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue, :total_amount_before_vat => total_amount_before_vat)
+    invoice.stub(:number => number, :clients_nicknames => clients_nicknames, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue, :total_amount_before_vat => total_amount_before_vat)
+    clients_nicknames.stub(:join => stringified_clients_nicknames)
     assign :invoices, invoices
   end
 
@@ -35,6 +38,25 @@ describe "invoices/index" do
   it "shows the number of the invoices" do
     render
     rendered.should have_tag(".number", :text => number)
+  end
+
+  it "gets the nicknames of the invoiced clients" do
+    invoices.each do |i|
+      i.should_receive(:clients_nicknames).and_return(clients_nicknames)
+    end
+    render
+  end
+
+  it "converts the list of nicknames to a string" do
+    invoices.each do
+      clients_nicknames.should_receive(:join).with(", ")
+    end
+    render
+  end
+
+  it "shows the nicknames of the invoiced clients" do
+    render
+    rendered.should have_tag(".clients_nicknames", :text => stringified_clients_nicknames)
   end
 
   it "gets the date the invoices are owed" do
