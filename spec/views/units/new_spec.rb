@@ -1,12 +1,12 @@
 require "spec_helper"
 
 describe "units/new" do
-  let(:unit)     { mock_model(Unit) }
-  let(:form)     { mock("Form") }
+  let(:unit) { mock_model(Unit) }
+  let(:form) { mock("Form") }
 
   before :each do
     stub_template("units/_form" => "")
-    assign :unit,     unit
+    assign :unit, unit
   end
 
   it "has a title" do

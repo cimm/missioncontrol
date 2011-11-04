@@ -4,7 +4,7 @@ describe "units/_form" do
   let(:unit)           { mock_model(Unit) }
   let(:project)        { mock_model(Project) }
   let(:projects)       { [project] }
-  let(:name)           { "Project Stradivarius" }
+  let(:name)           { mock("Project name") }
   let(:today)          { Date.today }
   let(:partial_render) { render :partial => "units/form", :object => @form }
 
@@ -62,7 +62,7 @@ describe "units/_form" do
   it "has a project field" do
     partial_render
     rendered.should have_tag("select", :with => {:id => "unit_project_id"}) do
-      with_tag "option", :with => {:value => project.id}, :text => /#{name}/i
+      with_tag "option", :with => {:value => project.id}, :text => name
     end
   end
 

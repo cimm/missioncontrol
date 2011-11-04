@@ -70,7 +70,7 @@ describe "projects/index" do
 
     it "shows the default rates" do
       render
-      rendered.should have_tag(".default_rate", :text => /\s/)
+      rendered.should have_selector(".default_rate")
     end
   end
 
