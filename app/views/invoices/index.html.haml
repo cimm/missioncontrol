@@ -9,6 +9,7 @@
         %th Owed at
         %th Payed at
         %th Before VAT
+        %th After VAT
         %th
     %tbody
       - @invoices.each do |invoice|
@@ -23,5 +24,8 @@
           %td.total_amount_before_vat
             €
             = invoice.total_amount_before_vat
+          %td.total_amount_after_vat
+            €
+            = invoice.total_amount_after_vat
           %td= link_to "edit", edit_invoice_path(invoice), :id => "edit_invoice_#{invoice.id}", :class => "btn small"
   = link_to "New", new_invoice_path, :accesskey => 'n', :class => "btn"

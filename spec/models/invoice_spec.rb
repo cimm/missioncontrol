@@ -347,6 +347,94 @@ describe Invoice do
     end
   end
 
+  describe "total_amount_after_vat" do
+    let(:vat_percentage_string)   { mock("VAT percentage as string") }
+    let(:vat_percentage_integer)  { mock("VAT percentage as integer") }
+    let(:total_amount_before_vat) { mock("Total amount before VAT") }
+    let(:vat_on_total_amount)     { mock("VAT on total amount") }
+    let(:total_amount_after_vat)  { mock("Total amount after VAT") }
+    let(:total_amount_before_vat) { mock("Total amount before VAT") }
+
+    before :each do
+      Preference.stub(:value_of => vat_percentage_string)
+      vat_percentage_string.stub(:to_i => vat_percentage_integer)
+      invoice.stub(:calculate_vat_on_total_amount => vat_on_total_amount, :calculate_total_amount_after_vat => total_amount_after_vat, :total_amount_before_vat => total_amount_before_vat)
+    end
+
+    it "gets the VAT percentage from the preferences" do
+      Preference.should_receive(:value_of).with(Invoice::VAT_PERCENTAGE_KEY)
+      invoice.total_amount_after_vat
+    end
+
+    it "converts the VAT percentage to an integer" do
+      vat_percentage_string.should_receive(:to_i)
+      invoice.total_amount_after_vat
+    end
+
+    it "calculates the VAT" do
+      invoice.should_receive(:calculate_vat_on_total_amount).with(vat_percentage_integer)
+      invoice.total_amount_after_vat
+    end
+
+    it "gets the total amount before VAT" do
+      invoice.should_receive(:total_amount_before_vat)
+      invoice.total_amount_after_vat
+    end
+
+    it "calculates the total amount after VAT" do
+      invoice.should_receive(:calculate_total_amount_after_vat).with(total_amount_before_vat, vat_on_total_amount)
+      invoice.total_amount_after_vat
+    end
+
+    it "returns the total amount after VAT" do
+      invoice.total_amount_after_vat.should eql total_amount_after_vat
+    end
+  end
+
+  describe "calculate_vat_on_total_amount" do
+    let(:vat_percentage)          { mock("Percentage VAT") }
+    let(:total_amount_before_vat) { mock("Total amount before VAT") }
+    let(:vat)                     { mock("VAT") }
+
+    before :each do
+      invoice.stub(:total_amount_before_vat => total_amount_before_vat, :calculates_vat => vat)
+    end
+
+    it "gets the total amount before VAT" do
+      invoice.should_receive(:total_amount_before_vat)
+      invoice.calculate_vat_on_total_amount(vat_percentage)
+    end
+
+    it "calculates the VAT on the total amount" do
+      invoice.should_receive(:calculates_vat).with(total_amount_before_vat, vat_percentage)
+      invoice.calculate_vat_on_total_amount(vat_percentage)
+    end
+
+    it "returns the VAT on the total amount" do
+      invoice.calculate_vat_on_total_amount(vat_percentage).should eql vat
+    end
+  end
+
+  describe "calculates_vat" do
+    let(:amount)         { 200 }
+    let(:vat_percentage) { 21 }
+    let(:calculated_vat) { 42.0 }
+
+    it "returns the VAT on the amount" do
+      invoice.calculates_vat(amount, vat_percentage).should eql calculated_vat
+    end
+  end
+
+  describe "calculate_total_amount_after_vat" do
+    let(:total_amount_before_vat)           { 200 }
+    let(:vat_on_total_amount)               { 42 }
+    let(:caluclated_total_amount_after_vat) { 242 }
+
+    it "returns te total amount after VAT" do
+      invoice.calculate_total_amount_after_vat(total_amount_before_vat, vat_on_total_amount).should eql caluclated_total_amount_after_vat
+    end
+  end
+
   describe "clients_nicknames" do
     let(:client)            { mock("Client") }
     let(:clients)           { [client] }

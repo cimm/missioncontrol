@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  VAT_PERCENTAGE_KEY = "vat_percentage"
+
   has_many :units
   has_many :projects, :through => :units ,   :uniq => true
   has_many :clients,  :through => :projects, :uniq => true
@@ -36,6 +38,24 @@ class Invoice < ActiveRecord::Base
 
   def total_amount_before_vat
     cost_per_unit.sum
+  end
+
+  def total_amount_after_vat
+    vat_percentage      = Preference.value_of(VAT_PERCENTAGE_KEY).to_i
+    vat_on_total_amount = calculate_vat_on_total_amount(vat_percentage)
+    calculate_total_amount_after_vat(total_amount_before_vat, vat_on_total_amount)
+  end
+
+  def calculate_vat_on_total_amount(vat_percentage)
+    calculates_vat(total_amount_before_vat, vat_percentage)
+  end
+
+  def calculates_vat(amount, vat_percentage)
+    amount * (vat_percentage * 0.01)
+  end
+
+  def calculate_total_amount_after_vat(total_amount_before_vat, vat_on_total_amount)
+    total_amount_before_vat + vat_on_total_amount
   end
 
   def clients_nicknames

@@ -69,6 +69,9 @@ Then /^I see the list of invoices$/ do
   within ".total_amount_before_vat" do
     page.should have_content(@invoice.total_amount_before_vat)
   end
+  within ".total_amount_after_vat" do
+    page.should have_content(@invoice.total_amount_after_vat)
+  end
 end
 
 Then /^I see the invoice is overdue$/ do

@@ -11,9 +11,10 @@ describe "invoices/index" do
   let(:payed_at)                      { Date.today } # no mock due to bug in view matcher
   let(:overdue)                       { [true, false].sample }
   let(:total_amount_before_vat)       { rand(500)+1000 }
+  let(:total_amount_after_vat)        { rand(500)+5000 }
 
   before :each do
-    invoice.stub(:number => number, :clients_nicknames => clients_nicknames, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue, :total_amount_before_vat => total_amount_before_vat)
+    invoice.stub(:number => number, :clients_nicknames => clients_nicknames, :owed_at => owed_at, :payed_at => payed_at, :overdue? => overdue, :total_amount_before_vat => total_amount_before_vat, :total_amount_after_vat => total_amount_after_vat)
     clients_nicknames.stub(:join => stringified_clients_nicknames)
     assign :invoices, invoices
   end
@@ -99,16 +100,28 @@ describe "invoices/index" do
     end
   end
 
-  it "gets the total amounts for the invoices" do
+  it "gets the total amounts before VAT for the invoices" do
     invoices.each do |i|
       i.should_receive(:total_amount_before_vat).and_return(total_amount_before_vat)
     end
     render
   end
 
-  it "shows the total amount for the invoices" do
+  it "shows the total amount before VAT for the invoices" do
     render
     rendered.should have_tag(".total_amount_before_vat", :text => /€\s#{total_amount_before_vat}/)
+  end
+
+  it "gets the total amounts after VAT for the invoices" do
+    invoices.each do |i|
+      i.should_receive(:total_amount_after_vat).and_return(total_amount_after_vat)
+    end
+    render
+  end
+
+  it "shows the total amount after VAT for the invoices" do
+    render
+    rendered.should have_tag(".total_amount_after_vat", :text => /€\s#{total_amount_after_vat}/)
   end
 
   it "shows an edit link for the invoices" do
