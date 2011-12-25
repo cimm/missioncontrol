@@ -11,6 +11,7 @@ When /^I add a client$/ do
   fill_in "Postcode",   :with => "3000"
   fill_in "City",       :with => "Leuven"
   fill_in "Country",    :with => "Belgium"
+  select  "French",    :from => "Language"
   fill_in "VAT number", :with => "0999999999"
   click_button "Add client"
 end
@@ -33,6 +34,7 @@ When /^I update the client$/ do
   fill_in "Postcode",   :with => "SE10AA"
   fill_in "City",       :with => "London"
   fill_in "Country",    :with => "United Kingdom"
+  select  "English",     :from => "Language"
   fill_in "VAT number", :with => "999 9999 73"
   click_button "Update"
 end
@@ -45,6 +47,7 @@ Then /^the client has been updated$/ do
   @client.postcode.should    eql "SE10AA"
   @client.city.should        eql "London"
   @client.country.should     eql "United Kingdom"
+  @client.language.should    eql "en"
   @client.vat_number.should  eql "999 9999 73"
 end
 

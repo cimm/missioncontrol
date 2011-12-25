@@ -5,7 +5,7 @@ describe "clients/_form" do
   let(:partial_render) { render :partial => "clients/form", :object => @form }
 
   before :each do
-    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil, :vat_number => nil)
+    client.stub(:nickname => nil, :name => nil, :street => nil, :postcode => nil, :city => nil, :country => nil, :language => nil, :vat_number => nil)
     form_for(client) { |f| @form = f }
   end
 
@@ -67,6 +67,16 @@ describe "clients/_form" do
   it "has a country text field for the client" do
     partial_render
     rendered.should have_selector("#client_country")
+  end
+
+  it "has a label for the language select" do
+    partial_render
+    rendered.should have_content("Language")
+  end
+
+  it "has a language select box for the client" do
+    partial_render
+    rendered.should have_selector("#client_language")
   end
 
   it "has a label for the VAT number field" do

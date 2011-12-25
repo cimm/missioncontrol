@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110923071701) do
+ActiveRecord::Schema.define(:version => 20111225113853) do
 
   create_table "clients", :force => true do |t|
     t.string   "nickname",   :null => false
@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(:version => 20110923071701) do
     t.string   "vat_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "language"
   end
 
+  add_index "clients", ["language"], :name => "index_clients_on_language"
   add_index "clients", ["nickname"], :name => "index_clients_on_nickname"
 
   create_table "invoices", :force => true do |t|

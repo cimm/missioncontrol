@@ -23,6 +23,10 @@
   .input
     = form.text_field :country
 .clearfix
+  = form.label :language
+  .input
+    = form.select :language, Client::LANGUAGE_PAIRS
+.clearfix
   = form.label :vat_number, "VAT number"
   .input
     = form.text_field :vat_number
