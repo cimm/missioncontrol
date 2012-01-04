@@ -45,4 +45,8 @@ FactoryGirl.define do
       owed_at
     end
   end
+
+  factory :expense do
+    number
+  end
 end

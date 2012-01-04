@@ -30,6 +30,11 @@ describe "layouts/_navigation" do
     rendered.should have_tag("a", :with => {:href => invoices_path}, :text => "Invoices")
   end
 
+  it "links to the expenses index page" do
+    render
+    rendered.should have_tag("a", :with => {:href => expenses_path}, :text => "Expenses")
+  end
+
   it "links to the preferences index page" do
     render
     rendered.should have_tag("a", :with => {:href => preferences_path}, :text => "Preferences")

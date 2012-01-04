@@ -11,6 +11,8 @@
           = link_to "Clients", clients_path, :accesskey => 'c'
         %li{:class => active("invoices")}
           = link_to "Invoices", invoices_path, :accesskey => 'i'
+        %li{:class => active("expenses")}
+          = link_to "Expenses", expenses_path, :accesskey => 'e'
       %ul.secondary-nav
         %li{:class => active("preferences")}
           = link_to "Preferences", preferences_path
