@@ -48,6 +48,11 @@ describe Expense do
     expense.should_not be_valid
   end
 
+  it "accepts a decimal amount" do
+    expense.amount = 400.50
+    expense.amount.should eql 400.50
+  end
+
   it "isn't valid with a negative amount" do
     expense.amount = -500
     expense.should_not be_valid

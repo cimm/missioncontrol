@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
   add_index "clients", ["nickname"], :name => "index_clients_on_nickname"
 
   create_table "expenses", :force => true do |t|
-    t.string   "number",      :null => false
+    t.string   "number",                                    :null => false
     t.string   "reference"
-    t.string   "company",     :null => false
-    t.integer  "amount",      :null => false
+    t.string   "company",                                   :null => false
+    t.decimal  "amount",      :precision => 8, :scale => 2, :null => false
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
   add_index "preferences", ["setting"], :name => "index_preferences_on_setting"
 
   create_table "projects", :force => true do |t|
-    t.string   "name",         :null => false
-    t.integer  "client_id",    :null => false
-    t.integer  "default_rate"
+    t.string   "name",                                       :null => false
+    t.integer  "client_id",                                  :null => false
+    t.decimal  "default_rate", :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

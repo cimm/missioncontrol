@@ -4,7 +4,7 @@ class AddExpenses < ActiveRecord::Migration
       t.string  :number,   :null => false
       t.string  :reference
       t.string  :company,  :null => false
-      t.integer :amount,   :null => false
+      t.decimal :amount,   :null => false, :precision => 8, :scale => 2
       t.string  :description
       t.timestamps
     end

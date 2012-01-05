@@ -38,6 +38,11 @@ describe Project do
     project.should respond_to :default_rate=
   end
 
+  it "accepts a decimal default rate" do
+    project.default_rate = 400.50
+    project.default_rate.should eql 400.50
+  end
+
   it "isn't valid with a negative default rate" do
     project.default_rate = -500
     project.should_not be_valid
