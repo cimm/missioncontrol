@@ -11,3 +11,8 @@ Feature: Track my expenses
   Scenario: add an expense
     When I add an expense
     Then the expense has been added
+
+  Scenario: list the expenses
+    Given I have an expense
+    When I list the expenses
+    Then I see the list of expenses

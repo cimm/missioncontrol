@@ -1,4 +1,18 @@
 %section#expenses
   .page-header
     %h1 Expenses
+  %table.zebra-striped
+    %thead
+      %tr
+        %th Number
+        %th Company
+        %th Amount
+        %th
+    %tbody
+      - @expenses.each do |expense|
+        %tr
+          %td.number= expense.number
+          %td.company= expense.company
+          %td.amount= expense.amount
+          %td
   = link_to "New", new_expense_path, :accesskey => 'n', :class => "btn"
