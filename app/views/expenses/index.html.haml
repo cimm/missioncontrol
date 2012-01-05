@@ -14,5 +14,5 @@
           %td.number= expense.number
           %td.company= expense.company
           %td.amount= expense.amount
-          %td
+          %td= link_to "edit", edit_expense_path(expense), :id => "edit_expense_#{expense.id}", :class => "btn small"
   = link_to "New", new_expense_path, :accesskey => 'n', :class => "btn"

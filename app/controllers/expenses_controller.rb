@@ -16,4 +16,15 @@ class ExpensesController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @expense = Expense.find(params[:id])
+  end
+
+  def update
+    expense = Expense.find(params[:id])
+    expense.update_attributes(params[:expense])
+    flash[:notice] = "Expense updated"
+    redirect_to(:action => "index")
+  end
 end

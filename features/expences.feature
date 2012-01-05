@@ -16,3 +16,8 @@ Feature: Track my expenses
     Given I have an expense
     When I list the expenses
     Then I see the list of expenses
+
+  Scenario: update an expense
+    Given I have an expense
+    When I update the expense
+    Then the expense has been updated

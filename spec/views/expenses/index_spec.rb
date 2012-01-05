@@ -57,4 +57,9 @@ describe "expenses/index" do
     render
     rendered.should have_tag(".amount", :text => amount)
   end
+
+  it "shows an edit link for the expenses" do
+    render
+    rendered.should have_selector("a#edit_expense_#{expense.id}")
+  end
 end

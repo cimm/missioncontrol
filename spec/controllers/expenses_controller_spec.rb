@@ -30,7 +30,7 @@ describe ExpensesController do
     end
   end
 
-  describe "new" do
+  describe :new do
     it "creates a new expense" do
       Expense.should_receive(:new)
       get :new
@@ -47,7 +47,7 @@ describe ExpensesController do
     end
   end
 
-  describe "create" do
+  describe :create do
     let(:params) { {} }
 
     before :each do
@@ -101,5 +101,58 @@ describe ExpensesController do
         response.should render_template(:new)
       end
     end
+  end
+
+  describe :edit do
+    let(:expense_id) { "Id for the edited expense"}
+
+    before :each do
+      Expense.stub(:find => expense)
+    end
+
+    it "gets the expense to edit" do
+      Expense.should_receive(:find).with(expense_id)
+      get :edit, :id => expense_id
+    end
+
+    it "assigns the expense" do
+      get :edit, :id => expense_id
+      assigns(:expense).should eql expense
+    end
+
+    it "renders the edit page" do
+      get :edit, :id => expense_id
+      response.should render_template(:edit)
+    end
+  end
+
+  describe :update do
+    let(:expense_id) { "Id for the updated expense" }
+    let(:params)     { {} }
+
+    before :each do
+      Expense.stub(:find => expense)
+      expense.stub(:update_attributes)
+    end
+
+    it "gets the expense to update" do
+      Expense.should_receive(:find).with(expense_id)
+      put :update, :id => expense_id, :expense => params
+    end
+
+    it "updates and persists the expense" do
+      expense.should_receive(:update_attributes).with(params)
+      put :update, :id => expense_id, :expense => params
+    end
+
+    #it "assigns a flash message" do
+    #  put :update, :id => expense_id, :expense => params
+    #  flash[:notice].should_not be_nil
+    #end
+
+    #it "redirects to the expenses index page" do
+    #  put :update, :id => expense_id, :expense => params
+    #  response.should redirect_to(:action => "index")
+    #end
   end
 end
