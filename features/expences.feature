@@ -7,3 +7,7 @@ Feature: Track my expenses
     Given I am on the homepage
     When I go to the expenses page
     Then I am on the expenses page
+
+  Scenario: add an expense
+    When I add an expense
+    Then the expense has been added

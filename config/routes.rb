@@ -3,7 +3,7 @@ MissionControl::Application.routes.draw do
   resources :clients,     :except => [:show, :destroy]
   resources :projects,    :except => [:show, :destroy]
   resources :invoices,    :except => [:show, :destroy]
-  resources :expenses,    :only   => [:index]
+  resources :expenses,    :except => [:show, :destroy]
   resources :preferences, :only   => [:index, :edit, :update]
   root :to => 'units#index'
 end

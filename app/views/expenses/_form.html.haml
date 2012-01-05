@@ -1,0 +1,22 @@
+.clearfix
+  = form.label :number
+  .input
+    = form.text_field :number
+.clearfix
+  = form.label :reference
+  .input
+    = form.text_field :reference
+.clearfix
+  = form.label :company
+  .input
+    = form.text_field :company
+.clearfix
+  = form.label :description
+  .input
+    = form.text_field :description
+.clearfix
+  = form.label :amount
+  .input
+    .input-prepend
+      %span.add-on €
+      = form.text_field :amount, :class => "small"

@@ -1,17 +1,20 @@
 require 'factory_girl/syntax/sham'
 
-Sham.executed_at  { |n| Date.today + n.days }
+Sham.executed_at { |n| Date.today + n.days }
 
-Sham.nickname     { |n| "Acme #{n}" }
+Sham.nickname    { |n| "Acme #{n}" }
 
-Sham.name         { |n| "Project #{n}" }
-Sham.hours_spent  { rand(24)+1 }
+Sham.name        { |n| "Project #{n}" }
+Sham.hours_spent { rand(24)+1 }
 
-Sham.setting      { |n| "preference_#{n}" }
+Sham.setting     { |n| "preference_#{n}" }
 
-Sham.number       { |n| n+1 }
-Sham.owed_at      { |n| Date.today - (n+1).days }
-Sham.payed_at     { |n| Date.today - 1.day }
+Sham.number      { |n| n+1 }
+Sham.owed_at     { |n| Date.today - (n+1).days }
+Sham.payed_at    { |n| Date.today - 1.day }
+
+Sham.company     { |n| "Acme #{n}" }
+Sham.amount      { rand(200)+1 }
 
 FactoryGirl.define do
   factory :unit do
@@ -48,5 +51,7 @@ FactoryGirl.define do
 
   factory :expense do
     number
+    company
+    amount
   end
 end

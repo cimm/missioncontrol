@@ -12,4 +12,9 @@ describe "expenses/index" do
     render
     rendered.should have_content("Expenses")
   end
+
+  it "has a link to create a new expense" do
+    render
+    rendered.should have_link("New")
+  end
 end
