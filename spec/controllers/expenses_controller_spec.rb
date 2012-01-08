@@ -31,6 +31,13 @@ describe ExpensesController do
   end
 
   describe :new do
+    let(:next_number) { mock("Next number") }
+
+    before :each do
+      Expense.stub(:next_number => next_number)
+      expense.stub(:number= => nil)
+    end
+
     it "creates a new expense" do
       Expense.should_receive(:new)
       get :new
@@ -39,6 +46,16 @@ describe ExpensesController do
     it "assigns the expense" do
       get :new
       assigns(:expense).should eql expense
+    end
+
+    it "gets the next number" do
+      Expense.should_receive(:next_number)
+      get :new
+    end
+
+    it "adds the next number to the expense" do
+      expense.should_receive(:number=).with(next_number)
+      get :new
     end
 
     it "renders the new expense page" do

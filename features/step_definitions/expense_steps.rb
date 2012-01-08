@@ -36,7 +36,7 @@ Then /^the expense has been updated$/ do
   last_year = Date.today - 1.year
   @expense.reload
   @expense.booked_at.should   eql last_year
-  @expense.number.should      eql "50"
+  @expense.number.should      eql 50
   @expense.reference.should   eql "B321"
   @expense.company.should     eql "Prime Corporation"
   @expense.amount.should      eql 100.25

@@ -72,4 +72,41 @@ describe Expense do
     expense.booked_at = nil
     expense.should_not be_valid
   end
+
+  describe "self.next_number" do
+    let(:previous_expense_number) { mock("Previous expense number") }
+    let(:next_expense_number)     { mock("Next expense number") }
+
+    before :each do
+      Expense.stub(:maximum => previous_expense_number)
+      previous_expense_number.stub(:+ => next_expense_number)
+    end
+
+    it "gets the highest expense number" do
+      Expense.should_receive(:maximum).with(:number)
+      Expense.next_number
+    end
+
+    context "there are other expenses" do
+      it "calculates the next number" do
+        previous_expense_number.should_receive(:+).with(1)
+        Expense.next_number
+      end
+
+      it "returns the next number" do
+        Expense.next_number.should eql next_expense_number
+      end
+    end
+
+    context "there are no other expenses" do
+      let(:previous_expense_number) do
+        allow_message_expectations_on_nil
+        nil
+      end
+
+      it "returns 1 as the next number" do
+        Invoice.next_number.should eql 1
+      end
+    end
+  end
 end

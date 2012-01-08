@@ -1,7 +1,9 @@
 .clearfix
   = form.label :number
   .input
-    = form.text_field :number
+    .input-prepend
+      %span.add-on #
+      = form.text_field :number, :class => "small"
 .clearfix
   = form.label :reference
   .input

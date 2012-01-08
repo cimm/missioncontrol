@@ -4,7 +4,8 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @expense = Expense.new
+    @expense        = Expense.new
+    @expense.number = Expense.next_number
   end
 
   def create

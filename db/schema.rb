@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
   add_index "clients", ["nickname"], :name => "index_clients_on_nickname"
 
   create_table "expenses", :force => true do |t|
-    t.string   "number",                                    :null => false
+    t.integer  "number",                                    :null => false
     t.string   "reference"
     t.string   "company",                                   :null => false
     t.decimal  "amount",      :precision => 8, :scale => 2, :null => false
