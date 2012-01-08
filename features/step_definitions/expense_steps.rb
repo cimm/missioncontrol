@@ -25,11 +25,17 @@ When /^I update the expense$/ do
   fill_in "Company",     :with => "Prime Corporation"
   fill_in "Amount",      :with => "100.25"
   fill_in "Description", :with => "Mobile bill February"
+  last_year = Date.today - 1.year
+  select last_year.year.to_s,      :from => "expense_booked_at_1i"
+  select last_year.strftime('%B'), :from => "expense_booked_at_2i"
+  select last_year.day.to_s,       :from => "expense_booked_at_3i"
   click_button "Update"
 end
 
 Then /^the expense has been updated$/ do
+  last_year = Date.today - 1.year
   @expense.reload
+  @expense.booked_at.should   eql last_year
   @expense.number.should      eql "50"
   @expense.reference.should   eql "B321"
   @expense.company.should     eql "Prime Corporation"

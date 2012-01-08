@@ -15,6 +15,7 @@ Sham.payed_at    { |n| Date.today - 1.day }
 
 Sham.company     { |n| "Acme #{n}" }
 Sham.amount      { rand(200)+1 }
+Sham.booked_at   { |n| Date.today - 1.day }
 
 FactoryGirl.define do
   factory :unit do
@@ -53,5 +54,6 @@ FactoryGirl.define do
     number
     company
     amount
+    booked_at
   end
 end

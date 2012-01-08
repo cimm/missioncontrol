@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
     t.string   "company",                                   :null => false
     t.decimal  "amount",      :precision => 8, :scale => 2, :null => false
     t.string   "description"
+    t.date     "booked_at",                                 :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -62,4 +62,14 @@ describe Expense do
     expense.should respond_to :description
     expense.should respond_to :description=
   end
+
+  it "has a booked date" do
+    expense.should respond_to :booked_at
+    expense.should respond_to :booked_at=
+  end
+
+  it "isn't valid without a booked date" do
+    expense.booked_at = nil
+    expense.should_not be_valid
+  end
 end

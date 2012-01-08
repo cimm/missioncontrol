@@ -58,4 +58,16 @@ describe "expenses/_form" do
     partial_render
     rendered.should have_selector("#expense_amount")
   end
+
+  it "has a label for the booked date fields" do
+    partial_render
+    rendered.should have_content("Booked at")
+  end
+
+  it "has booked date fields" do
+    partial_render
+    rendered.should have_selector("#expense_booked_at_1i")
+    rendered.should have_selector("#expense_booked_at_2i")
+    rendered.should have_selector("#expense_booked_at_3i")
+  end
 end

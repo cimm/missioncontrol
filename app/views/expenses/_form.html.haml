@@ -20,3 +20,7 @@
     .input-prepend
       %span.add-on €
       = form.text_field :amount, :class => "small"
+.clearfix
+  = form.label :booked_at
+  .input
+    = form.date_select :booked_at
