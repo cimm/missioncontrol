@@ -18,7 +18,8 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    @client = Client.find(params[:id])
+    @client           = Client.find(params[:id])
+    @vat_number_valid = @client.has_valid_vat_number?
   end
 
   def update

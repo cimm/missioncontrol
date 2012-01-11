@@ -3,6 +3,7 @@ require 'factory_girl/syntax/sham'
 Sham.executed_at { |n| Date.today + n.days }
 
 Sham.nickname    { |n| "Acme #{n}" }
+Sham.vat_number  { |n| "BE 0123.456.78#{n}" }
 
 Sham.name        { |n| "Project #{n}" }
 Sham.hours_spent { rand(24)+1 }
@@ -26,6 +27,10 @@ FactoryGirl.define do
 
   factory :client do
     nickname
+  end
+
+  factory :client_with_vat_number, :parent => :client do
+    vat_number
   end
 
   factory :project do

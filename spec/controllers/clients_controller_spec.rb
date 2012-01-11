@@ -104,10 +104,12 @@ describe ClientsController do
   end
 
   describe "edit" do
-    let(:client_id) { "Id for the edited client" }
+    let(:client_id)        { "Id for the edited client" }
+    let(:vat_number_valid) { mock("Is the VAT number valid") }
 
     before :each do
       Client.stub(:find => client)
+      client.stub(:has_valid_vat_number? => vat_number_valid)
     end
 
     it "gets the client to edit" do
@@ -118,6 +120,16 @@ describe ClientsController do
     it "assigns the client" do
       get :edit, :id => client_id
       assigns(:client).should eql client
+    end
+
+    it "gets the VAT number status from the client" do
+      client.should_receive(:has_valid_vat_number?)
+      get :edit, :id => client_id
+    end
+
+    it "assigns the VAT number status" do
+      get :edit, :id => client_id
+      assigns(:vat_number_valid).should eql vat_number_valid
     end
 
     it "renders the edit page" do

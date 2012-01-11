@@ -25,3 +25,8 @@ Feature: Know my clients
     Given I have a client
     When I update the client
     Then the client has been updated
+
+  Scenario: validate VAT number
+    Given I have a client with a VAT number
+    When I edit the client
+    Then the VAT number is validated

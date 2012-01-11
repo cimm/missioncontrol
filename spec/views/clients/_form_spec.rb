@@ -88,4 +88,34 @@ describe "clients/_form" do
     partial_render
     rendered.should have_selector("#client_vat_number")
   end
+
+  context "new record" do
+    it "does not show the VAT number status" do
+      partial_render
+      rendered.should_not have_content("VALID")
+      rendered.should_not have_content("NOT VALID")
+    end
+  end
+
+  context "edit record with valid VAT number" do
+    before :each do
+      assign(:vat_number_valid, true)
+    end
+
+    it "indicates the VAT number is valid" do
+      partial_render
+      rendered.should have_content("VALID")
+    end
+  end
+
+  context "edit record with an invalid VAT number" do
+    before :each do
+      assign(:vat_number_valid, false)
+    end
+
+    it "warns that the VAT number is invalid" do
+      partial_render
+      rendered.should have_content("NOT VALID")
+    end
+  end
 end

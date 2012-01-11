@@ -2,6 +2,10 @@ Given /^I have a client$/ do
   @client = FactoryGirl.create(:client)
 end
 
+Given /^I have a client with a VAT number$/ do
+  @client = FactoryGirl.create(:client_with_vat_number)
+end
+
 When /^I add a client$/ do
   visit clients_path
   click_link "New"
@@ -25,6 +29,10 @@ When /^I list the clients$/ do
   visit clients_path
 end
 
+When /^I edit the client$/ do
+  visit edit_client_path(@client)
+end
+
 When /^I update the client$/ do
   visit clients_path
   click_link "edit"
@@ -34,7 +42,7 @@ When /^I update the client$/ do
   fill_in "Postcode",   :with => "SE10AA"
   fill_in "City",       :with => "London"
   fill_in "Country",    :with => "United Kingdom"
-  select  "English",     :from => "Language"
+  select  "English",    :from => "Language"
   fill_in "VAT number", :with => "999 9999 73"
   click_button "Update"
 end
@@ -55,4 +63,8 @@ Then /^I see the list of clients$/ do
   within ".nickname" do
     page.should have_content(@client.nickname)
   end
+end
+
+Then /^the VAT number is validated$/ do
+  page.should have_content("NOT VALID")
 end
