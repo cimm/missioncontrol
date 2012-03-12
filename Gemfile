@@ -16,7 +16,7 @@ end
 group :test do
   gem 'rspec-rails',                 '~> 2.8.1'
   gem 'rspec2-rails-views-matchers', '~> 0.2.2'
-  gem 'cucumber-rails',              '~> 1.2.1', :require => false
+  gem 'cucumber-rails',              '~> 1.3.0', :require => false
   gem 'database_cleaner',            '~> 0.7.0'
   gem 'factory_girl_rails',          '~> 1.4.0'
 end
