@@ -16,7 +16,7 @@ Feel free to use this application if you like but it's tailored to my way of wor
 Installing
 ----------
 
-Make sure you have Ruby 1.9.2 and Bundler installed and clone this repository.
+Make sure you have Ruby 1.9.3 and Bundler installed and clone this repository.
 
     $ cp config/database.yml.example config/database.yml
     $ bundle install
