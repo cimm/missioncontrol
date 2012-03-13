@@ -35,7 +35,7 @@ end
 
 When /^I update the client$/ do
   visit clients_path
-  click_link "edit"
+  click_link "edit_client_#{@client.id}"
   fill_in "Nickname",   :with => "Prime"
   fill_in "Name",       :with => "Prime Corporation"
   fill_in "Street",     :with => "Keyworth Street 1"

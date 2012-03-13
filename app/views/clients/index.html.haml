@@ -1,7 +1,7 @@
 %section#clients
   .page-header
     %h1 Clients
-  %table.zebra-striped
+  %table.table.table-striped
     %thead
       %tr
         %th Nickname
@@ -12,5 +12,7 @@
         %tr
           %td.nickname= client.nickname
           %td.name= client.name
-          %td= link_to "edit", edit_client_path(client), :id => "edit_client_#{client.id}", :class => "btn small"
+          %td
+            = link_to edit_client_path(client), :id => "edit_client_#{client.id}" do
+              %i.icon-pencil
   = link_to "New", new_client_path, :accesskey => 'n', :class => "btn"

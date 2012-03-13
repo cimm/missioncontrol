@@ -29,7 +29,7 @@ end
 
 When /^I update the invoice$/ do
   visit invoices_path
-  click_link "edit"
+  click_link "edit_invoice_#{@invoice.id}"
   fill_in "Number",                    :with => "2011999"
   last_year = Date.today - 1.year
   select last_year.year.to_s,          :from => "invoice_owed_at_1i"

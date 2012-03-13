@@ -23,7 +23,7 @@ end
 When /^I update the project$/ do
   @new_client = FactoryGirl.create(:client)
   visit projects_path
-  click_link "edit"
+  click_link "edit_project_#{@project.id}"
   fill_in "Name",              :with => "Project Amadeus"
   select @new_client.nickname, :from => "Client"
   fill_in "Default rate",      :with => "450"

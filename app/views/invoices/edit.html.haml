@@ -3,7 +3,7 @@
     %h1 Edit invoice
   = form_for @invoice do |f|
     = render :partial => "form", :object => f
-    .actions
-      = f.submit "Update invoice", :class => "btn primary"
+    .form-actions
+      = f.submit "Update invoice", :class => "btn btn-primary"
       or
       = link_to "cancel", invoices_path

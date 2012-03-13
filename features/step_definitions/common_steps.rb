@@ -3,7 +3,7 @@ Given /^I am on the homepage$/ do
 end
 
 When /^I go to the (.*) page$/ do |page|
-  within ".topbar" do
+  within ".nav" do
     click_link page.humanize
   end
 end

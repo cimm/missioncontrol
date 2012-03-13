@@ -1,12 +1,13 @@
 !!!
 %html
   %head
+    %meta{:charset => "utf-8"}
     %title Mission Control
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
     = render "layouts/navigation"
-    .container
+    .container#main
       = render :partial => "layouts/flash", :object => flash
       = yield

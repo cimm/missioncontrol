@@ -8,7 +8,7 @@ end
 
 When /^I update the preference$/ do
   visit preferences_path
-  click_link "edit"
+  click_link "edit_preference_#{@preference.id}"
   fill_in @preference.setting.humanize, :with => "Another value"
   click_button "Update"
 end

@@ -1,7 +1,7 @@
 %section#invoices
   .page-header
     %h1 Invoices
-  %table.zebra-striped
+  %table.table.table-striped
     %thead
       %tr
         %th Number
@@ -27,5 +27,7 @@
           %td.total_amount_after_vat
             €
             = invoice.total_amount_after_vat
-          %td= link_to "edit", edit_invoice_path(invoice), :id => "edit_invoice_#{invoice.id}", :class => "btn small"
+          %td
+            = link_to edit_invoice_path(invoice), :id => "edit_invoice_#{invoice.id}" do
+              %i.icon-pencil
   = link_to "New", new_invoice_path, :accesskey => 'n', :class => "btn"

@@ -19,7 +19,7 @@ end
 
 When /^I update the expense$/ do
   visit expenses_path
-  click_link "edit"
+  click_link "edit_expense_#{@expense.id}"
   fill_in "Number",      :with => "50"
   fill_in "Reference",   :with => "B321"
   fill_in "Company",     :with => "Prime Corporation"

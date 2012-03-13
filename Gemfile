@@ -1,11 +1,12 @@
 source :rubygems
 
-gem 'rails',        '~> 3.1.3'
-gem 'sqlite3',      '~> 1.3.5'
-gem 'haml',         '~> 3.1.4'
-gem 'jquery-rails', '~> 1.0.0'
-gem 'dotiw',        '~> 1.1.1'
-gem 'therubyracer', '~> 0.9.9'
+gem 'rails',                   '~> 3.1.3'
+gem 'sqlite3',                 '~> 1.3.5'
+gem 'haml',                    '~> 3.1.4'
+gem 'jquery-rails',            '~> 1.0.0'
+gem 'dotiw',                   '~> 1.1.1'
+gem 'therubyracer',            '~> 0.9.9'
+gem 'twitter-bootstrap-rails', '~> 2.0.3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

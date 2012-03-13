@@ -3,7 +3,7 @@
     %h1 Edit preference
   = form_for @preference do |f|
     = render :partial => "form", :object => f
-    .actions
-      = f.submit "Update preference", :class => "btn primary"
+    .form-actions
+      = f.submit "Update preference", :class => "btn btn-primary"
       or
       = link_to "cancel", preferences_path

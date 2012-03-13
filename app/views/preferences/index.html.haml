@@ -1,10 +1,12 @@
 %section#preferences
   .page-header
     %h1 Preferences
-  %table
+  %table.table.table-striped
     %tbody
       - @preferences.each do |preference|
         %tr
           %th= preference.setting.humanize
           %td.value= preference.value
-          %td= link_to "edit", edit_preference_path(preference), :id => "edit_preference_#{preference.id}", :class => "btn small"
+          %td
+            = link_to edit_preference_path(preference), :id => "edit_preference_#{preference.id}" do
+              %i.icon-pencil

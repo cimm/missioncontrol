@@ -1,18 +1,19 @@
-.topbar
-  .fill
+.navbar.navbar-fixed-top
+  .navbar-inner
     .container
-      %h3= link_to "Mission Control", root_path, :accesskey => 'h'
-      %ul.nav
-        %li{:class => active("units")}
-          = link_to "Units", units_path, :accesskey => 'u'
-        %li{:class => active("projects")}
-          = link_to "Projects", projects_path, :accesskey => 'p'
-        %li{:class => active("clients")}
-          = link_to "Clients", clients_path, :accesskey => 'c'
-        %li{:class => active("invoices")}
-          = link_to "Invoices", invoices_path, :accesskey => 'i'
-        %li{:class => active("expenses")}
-          = link_to "Expenses", expenses_path, :accesskey => 'e'
-      %ul.secondary-nav
-        %li{:class => active("preferences")}
-          = link_to "Preferences", preferences_path
+      = link_to "Mission Control", root_path, :class => 'brand', :accesskey => 'h'
+      .nav-collapse
+        %ul.nav
+          %li{:class => active("units")}
+            = link_to "Units", units_path, :accesskey => 'u'
+          %li{:class => active("projects")}
+            = link_to "Projects", projects_path, :accesskey => 'p'
+          %li{:class => active("clients")}
+            = link_to "Clients", clients_path, :accesskey => 'c'
+          %li{:class => active("invoices")}
+            = link_to "Invoices", invoices_path, :accesskey => 'i'
+          %li{:class => active("expenses")}
+            = link_to "Expenses", expenses_path, :accesskey => 'e'
+          %li.divider-vertical
+          %li{:class => active("preferences")}
+            = link_to "Preferences", preferences_path

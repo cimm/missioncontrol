@@ -25,7 +25,7 @@ When /^I update the unit$/ do
   @new_project = FactoryGirl.create(:project)
   @hours_spent = 8
   visit units_path
-  click_link "edit"
+  click_link "edit_unit_#{@unit.id}"
   last_year = Date.today - 1.year
   select last_year.year.to_s,      :from => "unit_executed_at_1i"
   select last_year.strftime('%B'), :from => "unit_executed_at_2i"
@@ -54,7 +54,7 @@ Then /^I see the list of units$/ do
 end
 
 Then /^I am warned yesterday's unit is missing$/ do
-  within ".notice" do
+  within ".alert" do
     page.should have_content("No unit found for yesterday")
   end
 end
