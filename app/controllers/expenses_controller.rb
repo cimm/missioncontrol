@@ -1,6 +1,13 @@
+require "date_range"
+
 class ExpensesController < ApplicationController
   def index
-    @expenses = Expense.all
+    if params[:date_range]
+      date_range = DateRange.new(params[:date_range])
+      @expenses  = Expense.within_date_range(date_range.start_date, date_range.end_date)
+    else
+      @expenses = Expense.all
+    end
   end
 
   def new

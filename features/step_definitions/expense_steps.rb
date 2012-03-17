@@ -2,6 +2,15 @@ Given /^I have an expense$/ do
   @expense = FactoryGirl.create(:expense)
 end
 
+Given /^I have expenses in every quarter$/ do
+  months    = [1, 4, 7, 10]
+  @expenses = []
+  months.each do |month|
+    booked_at = Date.strptime(month.to_s, "%m")
+    @expenses << FactoryGirl.create(:expense, :booked_at => booked_at)
+  end
+end
+
 When /^I add an expense$/ do
   visit expenses_path
   click_link "New"
@@ -15,6 +24,11 @@ end
 
 When /^I list the expenses$/ do
   visit expenses_path
+end
+
+When /^I filter by one quarter$/ do
+  visit expenses_path
+  click_link "Q1"
 end
 
 When /^I update the expense$/ do
@@ -53,4 +67,11 @@ Then /^I see the list of expenses$/ do
   within ".amount" do
     page.should have_content(@expense.amount)
   end
+end
+
+Then /^I only see the expenses in that quarter$/ do
+  page.should     have_content(@expenses[0].company)
+  page.should_not have_content(@expenses[1].company)
+  page.should_not have_content(@expenses[2].company)
+  page.should_not have_content(@expenses[3].company)
 end

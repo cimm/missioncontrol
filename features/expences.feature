@@ -17,6 +17,11 @@ Feature: Track my expenses
     When I list the expenses
     Then I see the list of expenses
 
+  Scenario: filter the expenses per fiscal quarter
+    Given I have expenses in every quarter
+    When I filter by one quarter
+    Then I only see the expenses in that quarter
+
   Scenario: update an expense
     Given I have an expense
     When I update the expense

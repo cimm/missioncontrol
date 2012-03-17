@@ -17,6 +17,19 @@ describe "expenses/index" do
     rendered.should have_content("Expenses")
   end
 
+  it "has a link to filter on fiscal quarter" do
+    render
+    rendered.should have_link("Q1")
+    rendered.should have_link("Q2")
+    rendered.should have_link("Q3")
+    rendered.should have_link("Q4")
+  end
+
+  it "has a link to remove the filter" do
+    render
+    rendered.should have_link("All")
+  end
+
   it "has a link to create a new expense" do
     render
     rendered.should have_link("New")

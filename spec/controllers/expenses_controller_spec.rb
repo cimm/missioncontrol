@@ -1,5 +1,7 @@
 require "spec_helper"
 
+DATE_FORMAT = "%Y-%m-%d"
+
 describe ExpensesController do
   let(:expense) { mock("Expense") }
 
@@ -8,20 +10,66 @@ describe ExpensesController do
   end
 
   describe :index do
-    let(:expenses) { mock("All expenses") }
+    let(:expenses) { mock("Expenses") }
 
-    before :each do
-      Expense.stub(:all => expenses)
+    context "when the data range filter is applied" do
+      let(:date_range_param) { "Date range param" }
+      let(:params)           { {:date_range => date_range_param } }
+      let(:date_range)       { mock("Date range") }
+      let(:start_date)       { mock("Start date") }
+      let(:end_date)         { mock("End date") }
+
+      before :each do
+        Expense.stub(:within_date_range => expenses)
+        DateRange.stub(:new => date_range)
+        date_range.stub(:start_date => start_date, :end_date => end_date)
+      end
+
+      it "builds a new date range" do
+        DateRange.should_receive(:new).with(date_range_param)
+        get :index, params
+      end
+
+      it "gets the start date from the date range" do
+        date_range.should_receive(:start_date)
+        get :index, params
+      end
+
+      it "gets the end date from the date range" do
+        date_range.should_receive(:end_date)
+        get :index, params
+      end
+
+      it "gets only the expenses within the data range" do
+        Expense.should_receive(:within_date_range).with(start_date, end_date)
+        get :index, params
+      end
+
+      it "assigns the expenses within the date range" do
+        get :index, params
+        assigns(:expenses).should eql expenses
+      end
+
+      it "does not get all the expenses" do
+        Expense.should_not_receive(:all)
+        get :index, params
+      end
     end
 
-    it "gets all the expenses" do
-      Expense.should_receive(:all)
-      get :index
-    end
+    context "when no filter is applied" do
+      before :each do
+        Expense.stub(:all => expenses)
+      end
 
-    it "assigns all the expenses" do
-      get :index
-      assigns(:expenses).should eql expenses
+      it "gets all the expenses" do
+        Expense.should_receive(:all)
+        get :index
+      end
+
+      it "assigns all the expenses" do
+        get :index
+        assigns(:expenses).should eql expenses
+      end
     end
 
     it "renders the expenses page" do

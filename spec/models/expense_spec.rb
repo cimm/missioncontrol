@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe Expense do
+  WITHIN_DATE_RANGE_SQL = "DATE(booked_at) >= ? AND DATE(booked_at) <= ?"
+
   let(:expense) { FactoryGirl.build(:expense) }
 
   it "has a creation date" do
@@ -107,6 +109,26 @@ describe Expense do
       it "returns 1 as the next number" do
         Invoice.next_number.should eql 1
       end
+    end
+  end
+
+  describe "self.within_date_range" do
+    let(:start_date)    { mock("Start date") }
+    let(:end_date)      { mock("End date") }
+    let(:sql_statement) { [WITHIN_DATE_RANGE_SQL, start_date, end_date] }
+    let(:expenses)      { [mock("Expense")] }
+
+    before :each do
+      Expense.stub(:where => expenses)
+    end
+
+    it "builds the SQL statement" do
+      Expense.should_receive(:where).with(sql_statement)
+      Expense.within_date_range(start_date, end_date)
+    end
+
+    it "returns the expenses" do
+      Expense.within_date_range(start_date, end_date).should eql expenses
     end
   end
 end
