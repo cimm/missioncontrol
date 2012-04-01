@@ -14,4 +14,8 @@ class Expense < ActiveRecord::Base
   def self.within_date_range(start_date, end_date)
     where([WITHIN_DATE_RANGE_SQL, start_date, end_date])
   end
+
+  def signed_amount
+    debit? ? amount : amount * -1
+  end
 end

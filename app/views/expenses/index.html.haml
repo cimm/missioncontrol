@@ -20,7 +20,7 @@
         %tr
           %td.number= expense.number
           %td.company= expense.company
-          %td.amount= expense.amount
+          %td.signed-amount= expense.signed_amount
           %td
             = link_to edit_expense_path(expense), :id => "edit_expense_#{expense.id}" do
               %i.icon-pencil

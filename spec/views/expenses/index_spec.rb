@@ -1,14 +1,14 @@
 require "spec_helper"
 
 describe "expenses/index" do
-  let(:expense)  { mock_model(Expense) }
-  let(:expenses) { [expense] }
-  let(:number)   { mock("Number") }
-  let(:company)  { mock("Company") }
-  let(:amount)   { mock("Amount") }
+  let(:expense)       { mock_model(Expense) }
+  let(:expenses)      { [expense] }
+  let(:number)        { mock("Number") }
+  let(:company)       { mock("Company") }
+  let(:signed_amount) { mock("Signed amount") }
 
   before :each do
-    expense.stub(:number => number, :company => company, :amount => amount)
+    expense.stub(:number => number, :company => company, :signed_amount => signed_amount)
     assign :expenses, expenses
   end
 
@@ -59,16 +59,16 @@ describe "expenses/index" do
     rendered.should have_tag(".company", :text => company)
   end
 
-  it "gets the amounts of the expenses" do
+  it "gets the signed amounts of the expenses" do
     expenses.each do |e|
-      e.should_receive(:amount)
+      e.should_receive(:signed_amount)
     end
     render
   end
 
-  it "shows the amounts of the expenses" do
+  it "shows the signed amounts of the expenses" do
     render
-    rendered.should have_tag(".amount", :text => amount)
+    rendered.should have_tag(".signed-amount", :text => signed_amount)
   end
 
   it "shows an edit link for the expenses" do

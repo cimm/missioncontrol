@@ -38,6 +38,7 @@ When /^I update the expense$/ do
   fill_in "Reference",   :with => "B321"
   fill_in "Company",     :with => "Prime Corporation"
   fill_in "Amount",      :with => "100.25"
+  uncheck "Debit"
   fill_in "Description", :with => "Mobile bill February"
   last_year = Date.today - 1.year
   select last_year.year.to_s,      :from => "expense_booked_at_1i"
@@ -49,12 +50,13 @@ end
 Then /^the expense has been updated$/ do
   last_year = Date.today - 1.year
   @expense.reload
-  @expense.booked_at.should   eql last_year
-  @expense.number.should      eql 50
-  @expense.reference.should   eql "B321"
-  @expense.company.should     eql "Prime Corporation"
-  @expense.amount.should      eql 100.25
-  @expense.description.should eql "Mobile bill February"
+  @expense.booked_at.should     eql last_year
+  @expense.number.should        eql 50
+  @expense.reference.should     eql "B321"
+  @expense.company.should       eql "Prime Corporation"
+  @expense.amount.should        eql 100.25
+  @expense.signed_amount.should eql -100.25
+  @expense.description.should   eql "Mobile bill February"
 end
 
 Then /^I see the list of expenses$/ do
@@ -64,8 +66,8 @@ Then /^I see the list of expenses$/ do
   within ".company" do
     page.should have_content(@expense.company)
   end
-  within ".amount" do
-    page.should have_content(@expense.amount)
+  within ".signed-amount" do
+    page.should have_content(@expense.signed_amount)
   end
 end
 

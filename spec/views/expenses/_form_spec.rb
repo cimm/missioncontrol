@@ -59,6 +59,16 @@ describe "expenses/_form" do
     rendered.should have_selector("#expense_amount")
   end
 
+  it "has a label for the debit flag" do
+    partial_render
+    rendered.should have_content("Debit")
+  end
+
+  it "has a debit checkbox for the expense" do
+    partial_render
+    rendered.should have_selector("#expense_debit")
+  end
+
   it "has a label for the booked date fields" do
     partial_render
     rendered.should have_content("Booked at")

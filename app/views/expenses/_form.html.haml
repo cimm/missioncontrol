@@ -23,6 +23,10 @@
       %span.add-on €
       = form.text_field :amount, :class => "input-mini"
 .clearfix
+  = form.label :debit, :class => "checkbox" do
+    = form.check_box :debit
+    Debit
+.clearfix
   = form.label :booked_at
   .input
     = form.date_select :booked_at

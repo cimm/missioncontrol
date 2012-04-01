@@ -60,6 +60,16 @@ describe Expense do
     expense.should_not be_valid
   end
 
+  it "has a debit flag" do
+    expense.should respond_to :debit?
+    expense.should respond_to :debit=
+  end
+
+  it "is debit by default" do
+    expense = Expense.new
+    expense.should be_debit
+  end
+
   it "has a description" do
     expense.should respond_to :description
     expense.should respond_to :description=
@@ -129,6 +139,44 @@ describe Expense do
 
     it "returns the expenses" do
       Expense.within_date_range(start_date, end_date).should eql expenses
+    end
+  end
+
+  describe :signed_amount do
+    let(:amount) { 500 }
+
+    before :each do
+      expense.stub(:amount => amount, :debit? => true)
+    end
+
+    it "gets the amount" do
+      expense.should_receive(:amount)
+      expense.signed_amount
+    end
+
+    it "checks if it's a debit expense" do
+      expense.should_receive(:debit?)
+      expense.signed_amount
+    end
+
+    context "when it's a debit expense" do
+      before :each do
+        expense.stub(:debit? => true)
+      end
+
+      it "returns the amount" do
+        expense.signed_amount.should eql 500
+      end
+    end
+
+    context "when it's a credit expense" do
+      before :each do
+        expense.stub(:debit? => false)
+      end
+
+      it "returns the signed amount" do
+        expense.signed_amount.should eql -500
+      end
     end
   end
 end

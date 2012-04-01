@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
     t.string   "city"
     t.string   "country"
     t.string   "vat_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "language"
   end
 
@@ -30,22 +30,23 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
   add_index "clients", ["nickname"], :name => "index_clients_on_nickname"
 
   create_table "expenses", :force => true do |t|
-    t.integer  "number",                                    :null => false
+    t.integer  "number",                                                      :null => false
     t.string   "reference"
-    t.string   "company",                                   :null => false
-    t.decimal  "amount",      :precision => 8, :scale => 2, :null => false
+    t.string   "company",                                                     :null => false
+    t.decimal  "amount",      :precision => 8, :scale => 2,                   :null => false
+    t.boolean  "debit",                                     :default => true, :null => false
     t.string   "description"
-    t.date     "booked_at",                                 :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.date     "booked_at",                                                   :null => false
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
   end
 
   create_table "invoices", :force => true do |t|
     t.integer  "number",     :null => false
     t.date     "payed_at"
     t.date     "owed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "invoices", ["number"], :name => "index_invoices_on_number", :unique => true
@@ -53,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
   create_table "preferences", :force => true do |t|
     t.string   "setting",    :null => false
     t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "preferences", ["setting"], :name => "index_preferences_on_setting"
@@ -63,8 +64,8 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
     t.string   "name",                                       :null => false
     t.integer  "client_id",                                  :null => false
     t.decimal  "default_rate", :precision => 8, :scale => 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   add_index "projects", ["client_id"], :name => "index_projects_on_client_id"
@@ -73,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20120104075459) do
     t.date     "executed_at",                               :null => false
     t.decimal  "hours_spent", :precision => 4, :scale => 2, :null => false
     t.integer  "project_id",                                :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "invoice_id"
   end
 

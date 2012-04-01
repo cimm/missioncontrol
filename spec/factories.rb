@@ -16,6 +16,7 @@ Sham.payed_at    { |n| Date.today - 1.day }
 
 Sham.company     { |n| "Acme #{n}" }
 Sham.amount      { rand(200)+1 }
+Sham.debit       { [true, false].sample }
 Sham.booked_at   { |n| Date.today - 1.day }
 
 FactoryGirl.define do
@@ -59,6 +60,7 @@ FactoryGirl.define do
     number
     company
     amount
+    debit
     booked_at
   end
 end
